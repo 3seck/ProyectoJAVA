@@ -543,7 +543,7 @@ public class frmPersonal extends javax.swing.JInternalFrame {
         PersonalDaoImp perso = PersonalDaoImp.getInstance();
         try{
             perso.update(getCampos());
-            JOptionPane.showMessageDialog(this, "Aula actualizado correctamente");
+            JOptionPane.showMessageDialog(this, "Personal actualizado correctamente");
             int fila=jtPersonal.getSelectedRow();
             cargaTabla();
             jtPersonal.setRowSelectionInterval(fila,fila); 

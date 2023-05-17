@@ -188,7 +188,7 @@ public class frmMain extends javax.swing.JFrame {
 
         optmAlumno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         optmAlumno.setMnemonic('p');
-        optmAlumno.setText("Alumno");
+        optmAlumno.setText("Alumnos");
         optmAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optmAlumnoActionPerformed(evt);
