@@ -24,6 +24,8 @@ public interface UnidadDao {
     
     List <Unidad> getByCursoAca(int idcurso) throws SQLException;
     
+    int getIdByCod(String codigo) throws SQLException;
+    
 
     
     

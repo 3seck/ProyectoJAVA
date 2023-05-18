@@ -184,4 +184,25 @@ public class UnidadDaoImp implements UnidadDao {
         return result;
     }
 
+    @Override
+    public int getIdByCod(String codigo) throws SQLException {
+        String sql = "select id from unidad where codigo=?";
+        int id = 0;
+
+        try ( Connection cn = MyDataSource.getConnection(); 
+              PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            pstm.setString(1, codigo);
+
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+
+                id = rs.getInt("id");
+
+            }
+        }
+        return id;
+    }
+
 }

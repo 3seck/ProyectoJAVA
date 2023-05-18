@@ -5,13 +5,14 @@
 package com.iesiliberis.crudcentroeducativo.controladorDAO;
 
 import com.iesiliberis.crudcentroeducativo.BD.MyDataSource;
-import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
 import com.iesiliberis.crudcentroeducativo.entidades.Matricula;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,12 @@ public class MatriculaDaoImp implements MatriculaDao {
     @Override
     public int add(Matricula a) throws SQLException {
       
+        AlumnoDaoImp alum = AlumnoDaoImp.getInstance();
+        int idAlumno = alum.getByDni(a.getDniAlumno());
+        
+        UnidadDaoImp uni = UnidadDaoImp.getInstance();
+        int idUnidad = uni.getIdByCod(a.getCodUnidad());
+        
         String sql="""
                   insert into matricula(idalumno, idunidad, descripcion, fMatricula, fBaja)
                   values (?,?,?,?,?)
@@ -43,11 +50,15 @@ public class MatriculaDaoImp implements MatriculaDao {
         try(Connection cn=MyDataSource.getConnection();
             PreparedStatement pstm=cn.prepareStatement(sql);){
         
-            pstm.setInt(1, a.getIdalumno());
-            pstm.setInt(2, a.getIdunidad());
+            pstm.setInt(1, idAlumno);
+            pstm.setInt(2, idUnidad);
             pstm.setString(3, a.getDescripcion());
-            pstm.setDate(4, (Date) a.getfMatricula());
-            pstm.setDate(5, (Date) a.getfBaja());
+             pstm.setDate(4, new java.sql.Date(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+             if (a.getfBaja() != null) {
+            pstm.setDate(5, new java.sql.Date(a.getfBaja().getTime()));
+        } else {
+            pstm.setDate(5, null);
+        }
             result=pstm.executeUpdate();
             
         }
@@ -146,6 +157,33 @@ public class MatriculaDaoImp implements MatriculaDao {
     @Override
     public void delete(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Matricula> getbyAlumno(int idAlumno) throws SQLException {
+        List<Matricula> matriculas = new ArrayList<>();
+        String sql = "SELECT * FROM matricula WHERE idalumno = ?";
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+            pstm.setInt(1, idAlumno);
+
+            try ( ResultSet rs = pstm.executeQuery();) {
+                while (rs.next()) {
+                    Matricula m = new Matricula();
+                    m.setIdmatricula(rs.getInt("id"));
+                    m.setIdalumno(rs.getInt("idalumno"));
+                    m.setIdunidad(rs.getInt("idunidad"));
+                    m.setDescripcion(rs.getString("descripcion"));
+                    m.setfMatricula(rs.getDate("fMatricula"));
+                    m.setfBaja(rs.getDate("fBaja"));
+
+                    matriculas.add(m);
+                }
+            }
+        }
+
+        return matriculas;
+    
     }
     
 }

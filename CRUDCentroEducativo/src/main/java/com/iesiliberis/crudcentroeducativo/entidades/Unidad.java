@@ -18,6 +18,7 @@ public class Unidad {
     int idaula;
     String CodCurso;
     String  DniTutor;
+    String CodAula;
 
     public String getCodCurso() {
         return CodCurso;
@@ -42,7 +43,7 @@ public class Unidad {
     public void setCodAula(String CodAula) {
         this.CodAula = CodAula;
     }
-    String CodAula;
+    
 
     public Unidad(int id, String codigo, String nombre, String observaciones, int idcurso, int idtutor, int idaula) {
         this.id = id;

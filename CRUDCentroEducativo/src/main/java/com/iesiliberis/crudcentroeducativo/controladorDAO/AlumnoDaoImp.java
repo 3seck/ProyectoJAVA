@@ -208,5 +208,25 @@ public class AlumnoDaoImp implements AlumnoDao {
         
         return result;
     }
+
+    @Override
+    public int getByDni(String dni) throws SQLException {
+         String sql = "select id from alumno where dni = ?";
+         int id = 0;
+         
+         try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            pstm.setString(1, dni);
+
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+
+                id = rs.getInt("id");
+
+            }
+        }
+        return id;
+    }
     
 }

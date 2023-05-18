@@ -123,6 +123,7 @@ public class frmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         pndEscritorio = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -139,10 +140,13 @@ public class frmMain extends javax.swing.JFrame {
         PersonalActual = new javax.swing.JMenuItem();
         PersonalAntiguo = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuMatriculas = new javax.swing.JMenuItem();
         jmCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         optmAcerca = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,6 +243,14 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         editMenu.add(jMenuItem1);
+
+        menuMatriculas.setText("Matriculas");
+        menuMatriculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMatriculasActionPerformed(evt);
+            }
+        });
+        editMenu.add(menuMatriculas);
 
         menuBar.add(editMenu);
 
@@ -341,6 +353,11 @@ public class frmMain extends javax.swing.JFrame {
         mostrarIFrame(pndEscritorio, personal);
     }//GEN-LAST:event_PersonalAntiguoActionPerformed
 
+    private void menuMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMatriculasActionPerformed
+        fmrMatricula mrt = new fmrMatricula(getIdsCursosByCursoAcademico(idCursoAcademico));
+        mostrarIFrame(pndEscritorio, mrt);
+    }//GEN-LAST:event_menuMatriculasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,9 +402,11 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmCursoAcademico;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuCurso;
+    private javax.swing.JMenuItem menuMatriculas;
     private javax.swing.JMenu menuPersonal;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem optmAcerca;

@@ -29,72 +29,71 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form fmrUnidad
-    */
+     */
     private List<Integer> idsCursos;
-    
+
     public fmrUnidad(List<Integer> idsCursos) {
         initComponents();
-        this.idsCursos=idsCursos;
+        this.idsCursos = idsCursos;
         configTabla();
         mostrarValoresEnTabla();
         setCampos();
         btnGuardar.setVisible(false);
     }
-    
-    private void configTabla(){
+
+    private void configTabla() {
         String col[] = {"Id", "Codigo", "Nombre", "Observaciones", "idcurso", "idtutor", "idaula"};
         DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtUnidad.setModel(modelo);
         jtUnidad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
-    private void mostrarValoresEnTabla()  {
-         DefaultTableModel modelo = (DefaultTableModel) jtUnidad.getModel();
-    UnidadDaoImp unidadControler = UnidadDaoImp.getInstance();
-    String[] fila = new String[7];
-    modelo.setNumRows(0);
-    try {
-        for (Integer idCurso : idsCursos) {
-            List<Unidad> lst = unidadControler.getByCursoAca(idCurso);
-            for (Unidad uni : lst) {
-                fila[0] = "" + uni.getId();
-                fila[1] = "" + uni.getCodigo();
-                fila[2] = "" + uni.getNombre();
-                fila[3] = "" + uni.getObservaciones();
 
-                // Obtener el codigo del curso
-                CursoDaoImp cursoDao = CursoDaoImp.getInstance();
-                int idCurso1 = uni.getIdcurso();
-                Curso curso = cursoDao.getById(idCurso1);
-                fila[4] = "" + curso.getCodigo();
+    private void mostrarValoresEnTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) jtUnidad.getModel();
+        UnidadDaoImp unidadControler = UnidadDaoImp.getInstance();
+        String[] fila = new String[7];
+        modelo.setNumRows(0);
+        try {
+            for (Integer idCurso : idsCursos) {
+                List<Unidad> lst = unidadControler.getByCursoAca(idCurso);
+                for (Unidad uni : lst) {
+                    fila[0] = "" + uni.getId();
+                    fila[1] = "" + uni.getCodigo();
+                    fila[2] = "" + uni.getNombre();
+                    fila[3] = "" + uni.getObservaciones();
 
-                // Obtener el dni del profe
-                PersonalDaoImp tutorDao = PersonalDaoImp.getInstance();
-                int idTutor = uni.getIdtutor();
-                Personal tutor = tutorDao.getById(idTutor);
-                fila[5] = "" + tutor.getDni();
+                    // Obtener el codigo del curso
+                    CursoDaoImp cursoDao = CursoDaoImp.getInstance();
+                    int idCurso1 = uni.getIdcurso();
+                    Curso curso = cursoDao.getById(idCurso1);
+                    fila[4] = "" + curso.getCodigo();
 
-                // Obtener el cod del aula
-                AulaDaoImp aul = AulaDaoImp.getInstance();
-                int idAula = uni.getIdaula();
-                Aula aula = aul.getById(idAula);
-                fila[6] = "" + aula.getCodigo();
+                    // Obtener el dni del profe
+                    PersonalDaoImp tutorDao = PersonalDaoImp.getInstance();
+                    int idTutor = uni.getIdtutor();
+                    Personal tutor = tutorDao.getById(idTutor);
+                    fila[5] = "" + tutor.getDni();
 
-                modelo.addRow(fila);
+                    // Obtener el cod del aula
+                    AulaDaoImp aul = AulaDaoImp.getInstance();
+                    int idAula = uni.getIdaula();
+                    Aula aula = aul.getById(idAula);
+                    fila[6] = "" + aula.getCodigo();
+
+                    modelo.addRow(fila);
+                }
             }
+            // Seleccionar la primera fila de la tabla
+            if (modelo.getRowCount() > 0) {
+                jtUnidad.setRowSelectionInterval(0, 0);
+                setCampos();
+            }
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
         }
-        // Seleccionar la primera fila de la tabla
-        if (modelo.getRowCount() > 0) {
-            jtUnidad.setRowSelectionInterval(0, 0);
-            setCampos();
-        }
-    } catch (Exception e) {
-        System.out.println("Error:" + e.getMessage());
+
     }
-           
-        
-    } 
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -408,7 +407,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarnone(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarnone
-        
+
     }//GEN-LAST:event_txtBuscarnone
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
@@ -430,7 +429,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnConfirmarDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDeleteActionPerformed
-        
+
     }//GEN-LAST:event_btnConfirmarDeleteActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
@@ -445,7 +444,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       btnGuardar.setVisible(false);
+        btnGuardar.setVisible(false);
         pnlCampos.setVisible(false);
 
         UnidadDaoImp cur = UnidadDaoImp.getInstance();
@@ -479,20 +478,20 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         setCampos();
     }//GEN-LAST:event_jtUnidadMouseClicked
 
-    private Unidad getCamposAdd(){
+    private Unidad getCamposAdd() {
         Unidad uni = new Unidad();
 
         uni.setId(Integer.parseInt(txtId.getText()));
         uni.setCodigo(txtCodigo.getText());
         uni.setNombre(txtNombre.getText());
         uni.setObservaciones(txtObservaciones.getText());
-        uni.setCodCurso(txtIdcurso.getText()); 
+        uni.setCodCurso(txtIdcurso.getText());
         uni.setDniTutor(txtIdtutor.getText());
         uni.setCodAula(txtIdaula.getText());
-        
-        return  uni;
+
+        return uni;
     }
-    
+
     private Unidad getCampos() {
 
         Unidad uni = new Unidad();
@@ -504,40 +503,30 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         uni.setIdcurso(Integer.parseInt(txtIdcurso.getText()));
         uni.setIdtutor(Integer.parseInt(txtIdtutor.getText()));
         uni.setIdaula(Integer.parseInt(txtIdaula.getText()));
-        
-        
+
         /*  
         uni.setCodCurso(txtIdcurso.getText());
         uni.setDniTutor(txtIdtutor.getText());
         uni.setCodAula(txtIdaula.getText());*/
         return uni;
     }
-    
-     private void setCampos() {
-      
-         int filaSeleccionada = jtUnidad.getSelectedRow();
-    if (filaSeleccionada >= 0) {
-        txtId.setText(jtUnidad.getValueAt(filaSeleccionada, 0).toString());
-        txtCodigo.setText(jtUnidad.getValueAt(filaSeleccionada, 1).toString());
-        txtNombre.setText(jtUnidad.getValueAt(filaSeleccionada, 2).toString());
-        txtObservaciones.setText(jtUnidad.getValueAt(filaSeleccionada, 3).toString());
-        txtIdcurso.setText(jtUnidad.getValueAt(filaSeleccionada, 4).toString());
-        txtIdtutor.setText(jtUnidad.getValueAt(filaSeleccionada, 5).toString());
-        txtIdaula.setText(jtUnidad.getValueAt(filaSeleccionada, 6).toString());
+
+    private void setCampos() {
+
+        int filaSeleccionada = jtUnidad.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            txtId.setText(jtUnidad.getValueAt(filaSeleccionada, 0).toString());
+            txtCodigo.setText(jtUnidad.getValueAt(filaSeleccionada, 1).toString());
+            txtNombre.setText(jtUnidad.getValueAt(filaSeleccionada, 2).toString());
+            txtObservaciones.setText(jtUnidad.getValueAt(filaSeleccionada, 3).toString());
+            txtIdcurso.setText(jtUnidad.getValueAt(filaSeleccionada, 4).toString());
+            txtIdtutor.setText(jtUnidad.getValueAt(filaSeleccionada, 5).toString());
+            txtIdaula.setText(jtUnidad.getValueAt(filaSeleccionada, 6).toString());
+        }
+
     }
-         /*
-        txtId.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 0).toString());
-        txtCodigo.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 1).toString());
-        txtNombre.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 2).toString());
-        txtObservaciones.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 3).toString());
-        txtIdcurso.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 4).toString());
-        txtIdtutor.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 5).toString());
-        txtIdaula.setText(jtUnidad.getValueAt(jtUnidad.getSelectedRow(), 6).toString());
-*/
-    }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnAtras;

@@ -23,4 +23,6 @@ public interface MatriculaDao {
     int update(Matricula a)  throws SQLException;
     
     void delete(int id)  throws SQLException;
+    
+    List<Matricula> getbyAlumno(int idAlumno)  throws SQLException;
 }

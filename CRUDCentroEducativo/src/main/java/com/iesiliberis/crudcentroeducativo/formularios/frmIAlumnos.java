@@ -37,7 +37,7 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
 
     private void configTabla() {
 
-        String col[] = {"ID", "DNI", "NOMBRE", "APELLIDOS", "FECHA NACIMIENTO","TELEFONO","EMAIL","DIRECCION","CP","POBLACION","PROVINCIA"};
+        String col[] = {"ID", "DNI", "NOMBRE", "APELLIDOS", "FECHA NACIMIENTO", "TELEFONO", "EMAIL", "DIRECCION", "CP", "POBLACION", "PROVINCIA"};
 
         DefaultTableModel modelo = new DefaultTableModel(col, 0) {
 
@@ -78,7 +78,10 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                 modelo.addRow(fila);
             }
             //selecciono la primera fila
-            jtAlumnos.setRowSelectionInterval(0, 0);
+            if (modelo.getRowCount() > 0) {
+                jtAlumnos.setRowSelectionInterval(0, 0);
+                setCampos();
+            }
 
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
@@ -380,11 +383,12 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -496,22 +500,8 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void jtAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAlumnosMouseClicked
-        /* if (evt.getClickCount() == 2) {
-            System.out.println("Doble Click");
+        setCampos();
 
-            JDialog frame = new JDialog(this,"Detalle Alumno", true);
-
-            jpAlumnos panel = new jpAlumnos();
-
-            int idseleccion=Integer.parseInt(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 0).toString());
-
-            panel.CargaDetalle(idseleccion);
-
-            frame.getContentPane().add(panel);
-            frame.pack();
-            frame.setVisible(true);
-        }*/
-        
     }//GEN-LAST:event_jtAlumnosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -532,28 +522,28 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         btnGuardar.setVisible(false);
         pnlCampos.setVisible(false);
         AlumnoDaoImp perso = AlumnoDaoImp.getInstance();
-        
+
         try {
             perso.add(getCampos());
             JOptionPane.showMessageDialog(this, "Alumno agregado correctamente");
             cargaTabla();
         } catch (Exception e) {
-            System.out.println("Error"+e.getMessage());
+            System.out.println("Error" + e.getMessage());
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnAceptarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditActionPerformed
         btnAceptarEdit.setVisible(false);
         AlumnoDaoImp alum = AlumnoDaoImp.getInstance();
-        try{
+        try {
             alum.update(getCampos());
             JOptionPane.showMessageDialog(this, "Personal actualizado correctamente");
-            int fila=jtAlumnos.getSelectedRow();
+            int fila = jtAlumnos.getSelectedRow();
             cargaTabla();
-            jtAlumnos.setRowSelectionInterval(fila,fila); 
-        }catch(Exception e){
-            System.out.println("Error:"+e.getMessage());
-         }
+            jtAlumnos.setRowSelectionInterval(fila, fila);
+        } catch (Exception e) {
+            System.out.println("Error:" + e.getMessage());
+        }
         pnlCampos.setVisible(false);
     }//GEN-LAST:event_btnAceptarEditActionPerformed
 
@@ -564,15 +554,15 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
 
     private void btnConfirmarDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDeleteActionPerformed
         pnlDelete.setVisible(false);
-        AlumnoDaoImp alum=AlumnoDaoImp.getInstance();
-        int id=Integer.parseInt(txtId.getText());
+        AlumnoDaoImp alum = AlumnoDaoImp.getInstance();
+        int id = Integer.parseInt(txtId.getText());
         try {
             Alumno a = alum.getById(id);
             alum.alumnoAntiguo(a);
             alum.delete(id);
             JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente");
         } catch (Exception e) {
-            System.out.println(""+e.getMessage());
+            System.out.println("" + e.getMessage());
         }
         cargaTabla();
     }//GEN-LAST:event_btnConfirmarDeleteActionPerformed
@@ -596,10 +586,9 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    
-    private Alumno getCampos(){
+    private Alumno getCampos() {
         Alumno p = new Alumno();
-        
+
         p.setId(Integer.parseInt(txtId.getText()));
         p.setDni(txtDni.getText());
         p.setNombre(txtNombre.getText());
@@ -612,27 +601,23 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         p.setTelefono(txtTelefono.getText());
         p.setEmail(txtEmail.getText());
         p.setFnacimiento(LocalDate.parse(txtFechaNacimiento.getText()));
-        return p; 
+        return p;
     }
-    
-    private void setCampos(){
-        
-         
-    txtId.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(),0).toString());
-    txtDni.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 1).toString());
-    txtNombre.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 2).toString());
-    txtApellidos.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 3).toString());
-    txtFechaNacimiento.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(),4).toString());
-    txtDireccion.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 5).toString());
-    txtcp.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 6).toString());
-    txtPoblacion.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 7).toString());
-    txtProvincia.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 8).toString());
-    txtTelefono.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 9).toString());
-    txtEmail.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 10).toString());
-    
 
-          
-      
+    private void setCampos() {
+
+        txtId.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 0).toString());
+        txtDni.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 1).toString());
+        txtNombre.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 2).toString());
+        txtApellidos.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 3).toString());
+        txtFechaNacimiento.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 4).toString());
+        txtDireccion.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 5).toString());
+        txtcp.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 6).toString());
+        txtPoblacion.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 7).toString());
+        txtProvincia.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 8).toString());
+        txtTelefono.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 9).toString());
+        txtEmail.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 10).toString());
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,7 +16,11 @@ public class Matricula {
     private  String descripcion;
     private Date fMatricula;
     private Date fBaja;
+        String dniAlumno;
+        String codUnidad;
 
+        
+        
     public Matricula() {
     }
     
@@ -37,6 +41,24 @@ public class Matricula {
         this.fMatricula = fMatricula;
         this.fBaja = fBaja;
     }
+
+    public String getDniAlumno() {
+        return dniAlumno;
+    }
+
+    public void setDniAlumno(String dniAlumno) {
+        this.dniAlumno = dniAlumno;
+    }
+
+    public String getCodUnidad() {
+        return codUnidad;
+    }
+
+    public void setCodUnidad(String codUnidad) {
+        this.codUnidad = codUnidad;
+    }
+    
+    
 
     public int getIdmatricula() {
         return idmatricula;

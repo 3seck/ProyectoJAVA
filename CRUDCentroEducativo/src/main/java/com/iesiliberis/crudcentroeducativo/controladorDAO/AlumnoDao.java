@@ -24,4 +24,6 @@ public interface AlumnoDao {
     void delete(int id)  throws SQLException;
     
     int alumnoAntiguo(Alumno a) throws SQLException;
+    
+    int getByDni(String dni) throws SQLException;
 }
