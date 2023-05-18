@@ -450,7 +450,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
 
         UnidadDaoImp cur = UnidadDaoImp.getInstance();
         try {
-            cur.add(getCampos());
+            cur.add(getCamposAdd());
             JOptionPane.showMessageDialog(this, "Unidad agregada correctamente");
             mostrarValoresEnTabla();
 
@@ -464,7 +464,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
 
         UnidadDaoImp cur = UnidadDaoImp.getInstance();
         try {
-            cur.update(getCampos());
+            cur.update(getCamposAdd());
             JOptionPane.showMessageDialog(this, "Curso actualizado correctamente");
             int fila = jtUnidad.getSelectedRow();
             mostrarValoresEnTabla();
@@ -479,6 +479,20 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         setCampos();
     }//GEN-LAST:event_jtUnidadMouseClicked
 
+    private Unidad getCamposAdd(){
+        Unidad uni = new Unidad();
+
+        uni.setId(Integer.parseInt(txtId.getText()));
+        uni.setCodigo(txtCodigo.getText());
+        uni.setNombre(txtNombre.getText());
+        uni.setObservaciones(txtObservaciones.getText());
+        uni.setCodCurso(txtIdcurso.getText()); 
+        uni.setDniTutor(txtIdtutor.getText());
+        uni.setCodAula(txtIdaula.getText());
+        
+        return  uni;
+    }
+    
     private Unidad getCampos() {
 
         Unidad uni = new Unidad();
@@ -490,6 +504,7 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         uni.setIdcurso(Integer.parseInt(txtIdcurso.getText()));
         uni.setIdtutor(Integer.parseInt(txtIdtutor.getText()));
         uni.setIdaula(Integer.parseInt(txtIdaula.getText()));
+        
         
         /*  
         uni.setCodCurso(txtIdcurso.getText());

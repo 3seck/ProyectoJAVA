@@ -13,59 +13,65 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UnidadDaoImp implements UnidadDao {
 
     private static UnidadDaoImp instance;
-    
-    static{
-        instance=new UnidadDaoImp();
+
+    static {
+        instance = new UnidadDaoImp();
     }
-    
-    private UnidadDaoImp(){ }
-    
-    public static UnidadDaoImp getInstance(){
+
+    private UnidadDaoImp() {
+    }
+
+    public static UnidadDaoImp getInstance() {
         return instance;
     }
 
-       
-        @Override
-      public int add(Unidad a) throws SQLException {
-          String sql = "INSERT INTO unidad (codigo, nombre, Observaciones, idcurso, idtutor, idaula) VALUES ( ?, ?, ?, ?, ?,?)";
-          int result = 0;
-          
-          try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-        
+    @Override
+    public int add(Unidad a) throws SQLException {
+        // Obtener los ids correspondientes al código del curso, el DNI del personal y el cod del aula
+        CursoDaoImp cursoDao = CursoDaoImp.getInstance();
+        int idCurso = cursoDao.getIdByCodigo(a.getCodCurso());
+
+        PersonalDaoImp personalDao = PersonalDaoImp.getInstance();
+        int idPersonal = personalDao.getIdByDni(a.getDniTutor());
+
+        AulaDaoImp aulaDao = AulaDaoImp.getInstance();
+        int idAula = aulaDao.getByCodigo(a.getCodAula());
+
+        // Crear la consulta SQL para agregar la unidad
+        String sql = "INSERT INTO unidad (codigo, nombre, Observaciones, idcurso, idtutor, idaula) VALUES (?, ?, ?, ?, ?, ?)";
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
             pstm.setString(1, a.getCodigo());
             pstm.setString(2, a.getNombre());
             pstm.setString(3, a.getObservaciones());
-            pstm.setInt(4, a.getIdcurso());
-            pstm.setInt(5, a.getIdtutor());
-            pstm.setInt(6, a.getIdaula());
-            
-            
-            result=pstm.executeUpdate();
-            
+            pstm.setInt(4, idCurso);
+            pstm.setInt(5, idPersonal);
+            pstm.setInt(6, idAula);
+
+            result = pstm.executeUpdate();
         }
 
-          return result;
-      }
+        return result;
+    }
+
     @Override
     public Unidad getById(int id) throws SQLException {
-        Unidad uni=null;
-        String sql="select * from unidad where id=?";
+        Unidad uni = null;
+        String sql = "select * from unidad where id=?";
 
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-        
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
             pstm.setInt(1, id);
-            
-            ResultSet rs=pstm.executeQuery();
-            
-            if (rs.next()){
-                uni=new Unidad();
-                
+
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                uni = new Unidad();
+
                 uni.setId(rs.getInt("id"));
                 uni.setCodigo(rs.getString("codigo"));
                 uni.setNombre(rs.getString("nombre"));
@@ -73,29 +79,28 @@ public class UnidadDaoImp implements UnidadDao {
                 uni.setIdcurso(rs.getInt("idcurso"));
                 uni.setIdtutor(rs.getInt("idtutor"));
                 uni.setIdaula(rs.getInt("idaula"));
-                
+
             }
-            
+
         }
-        
+
         return uni;
     }
 
     @Override
     public List<Unidad> getAll() throws SQLException {
-        Unidad uni =null;
-        String sql="select * from unidad ";
-        
-        List<Unidad> result=new ArrayList();
+        Unidad uni = null;
+        String sql = "select * from unidad ";
 
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-         
-            ResultSet rs=pstm.executeQuery();
-            
-            while (rs.next()){
-                uni=new Unidad();
-                
+        List<Unidad> result = new ArrayList();
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                uni = new Unidad();
+
                 uni.setId(rs.getInt("id"));
                 uni.setCodigo(rs.getString("codigo"));
                 uni.setNombre(rs.getString("nombre"));
@@ -105,38 +110,42 @@ public class UnidadDaoImp implements UnidadDao {
                 uni.setIdaula(rs.getInt("idaula"));
                 result.add(uni);
             }
-            
+
         }
-        
-        return result; 
+
+        return result;
     }
 
     @Override
     public int update(Unidad a) throws SQLException {
-       
-        String sql="""
-                  update unidad
-                  set id=?, codigo=?, nombre=?, Observaciones=?, idcurso=?, idtutor=?, idaula=?
-                   where id=?
-                   """;
-      int result=0;
-       
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-            
-            pstm.setInt(1, a.getId());
-            pstm.setString(2, a.getCodigo());
-            pstm.setString(3, a.getNombre());
-            pstm.setString(4, a.getObservaciones());
-            pstm.setInt(5, a.getIdcurso());
-            pstm.setInt(6, a.getIdtutor());
-            pstm.setInt(7, a.getIdaula());
-            pstm.setInt(8, a.getId());
-            
-            result=pstm.executeUpdate();
-            
+
+        // Obtener el valor id a partir del valor de codCurso
+        CursoDaoImp cursoDao = CursoDaoImp.getInstance();
+        int idCurso = cursoDao.getIdByCodigo(a.getCodCurso());
+
+        // Obtener los valores de "idtuto" e "idaula" a partir de los valores de "dniTutor" y "codAula"
+        PersonalDaoImp personalDao = PersonalDaoImp.getInstance();
+        int idTutor = personalDao.getIdByDni(a.getDniTutor());
+
+        AulaDaoImp aulaDao = AulaDaoImp.getInstance();
+        int idAula = aulaDao.getByCodigo(a.getCodAula());
+
+        // actualizar la unidad
+        String sql = "UPDATE unidad SET codigo = ?, nombre = ?, Observaciones = ?, idcurso = ?, idtutor = ?, idaula = ? WHERE id = ?";
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+            pstm.setString(1, a.getCodigo());
+            pstm.setString(2, a.getNombre());
+            pstm.setString(3, a.getObservaciones());
+            pstm.setInt(4, idCurso);
+            pstm.setInt(5, idTutor);
+            pstm.setInt(6, idAula);
+            pstm.setInt(7, a.getId());
+
+            result = pstm.executeUpdate();
         }
-        
+
         return result;
     }
 
@@ -147,20 +156,19 @@ public class UnidadDaoImp implements UnidadDao {
 
     @Override
     public List<Unidad> getByCursoAca(int idcurso) throws SQLException {
-        Unidad uni =null;
-        String sql="select * from unidad where idcurso = ? ";
-        
-        List<Unidad> result=new ArrayList();
+        Unidad uni = null;
+        String sql = "select * from unidad where idcurso = ? ";
 
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-         
+        List<Unidad> result = new ArrayList();
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
             pstm.setInt(1, idcurso);
-            ResultSet rs=pstm.executeQuery();
-            
-            while (rs.next()){
-                uni=new Unidad();
-                
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                uni = new Unidad();
+
                 uni.setId(rs.getInt("id"));
                 uni.setCodigo(rs.getString("codigo"));
                 uni.setNombre(rs.getString("nombre"));
@@ -170,12 +178,10 @@ public class UnidadDaoImp implements UnidadDao {
                 uni.setIdaula(rs.getInt("idaula"));
                 result.add(uni);
             }
-            
+
         }
-        
+
         return result;
     }
 
-   
-    
 }
