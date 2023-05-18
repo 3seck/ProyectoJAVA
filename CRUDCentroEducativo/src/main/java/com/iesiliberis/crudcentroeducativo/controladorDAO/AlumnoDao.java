@@ -22,4 +22,6 @@ public interface AlumnoDao {
     int update(Alumno a)  throws SQLException;
     
     void delete(int id)  throws SQLException;
+    
+    int alumnoAntiguo(Alumno a) throws SQLException;
 }

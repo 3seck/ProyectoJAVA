@@ -27,6 +27,12 @@ public interface CursoDao {
     
     CursoAcademico getCursoAcademico(Curso cu) throws SQLException;
     
+    Curso getcodigoById(int id) throws SQLException;
+    
+    int getIdByCodigo(String codigo) throws SQLException;
+    
+    List<Integer> getIDsByCursoAca(int idCursoAcademico)  throws SQLException;
+    
     
     
 }

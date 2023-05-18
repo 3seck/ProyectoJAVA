@@ -27,19 +27,14 @@ public class UnidadDaoImp implements UnidadDao {
     public static UnidadDaoImp getInstance(){
         return instance;
     }
-    
-    
-    
-    @Override
-    public int add(Unidad a) throws SQLException {
+
        
-        String sql="""
-                  insert into unidad (codigo, nombre, Observaciones, idcurso, idtutor, idaula)
-                  values (?,?,?,?,?,?)
-                  """;
-      int result=0;
-       
-        try(Connection cn=MyDataSource.getConnection();
+        @Override
+      public int add(Unidad a) throws SQLException {
+          String sql = "INSERT INTO unidad (codigo, nombre, Observaciones, idcurso, idtutor, idaula) VALUES ( ?, ?, ?, ?, ?,?)";
+          int result = 0;
+          
+          try(Connection cn=MyDataSource.getConnection();
             PreparedStatement pstm=cn.prepareStatement(sql);){
         
             pstm.setString(1, a.getCodigo());
@@ -49,15 +44,13 @@ public class UnidadDaoImp implements UnidadDao {
             pstm.setInt(5, a.getIdtutor());
             pstm.setInt(6, a.getIdaula());
             
+            
             result=pstm.executeUpdate();
             
         }
-        
-        return result;
-          
-        
-    }
 
+          return result;
+      }
     @Override
     public Unidad getById(int id) throws SQLException {
         Unidad uni=null;
@@ -151,5 +144,38 @@ public class UnidadDaoImp implements UnidadDao {
     public void delete(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<Unidad> getByCursoAca(int idcurso) throws SQLException {
+        Unidad uni =null;
+        String sql="select * from unidad where idcurso = ? ";
+        
+        List<Unidad> result=new ArrayList();
+
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+         
+            pstm.setInt(1, idcurso);
+            ResultSet rs=pstm.executeQuery();
+            
+            while (rs.next()){
+                uni=new Unidad();
+                
+                uni.setId(rs.getInt("id"));
+                uni.setCodigo(rs.getString("codigo"));
+                uni.setNombre(rs.getString("nombre"));
+                uni.setObservaciones(rs.getString("Observaciones"));
+                uni.setIdcurso(rs.getInt("idcurso"));
+                uni.setIdtutor(rs.getInt("idtutor"));
+                uni.setIdaula(rs.getInt("idaula"));
+                result.add(uni);
+            }
+            
+        }
+        
+        return result;
+    }
+
+   
     
 }

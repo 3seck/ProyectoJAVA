@@ -22,7 +22,9 @@ public interface UnidadDao {
     
     void delete(int id)  throws SQLException;
     
+    List <Unidad> getByCursoAca(int idcurso) throws SQLException;
     
+
     
     
 }

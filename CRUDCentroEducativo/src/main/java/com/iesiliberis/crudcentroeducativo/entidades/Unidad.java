@@ -8,14 +8,41 @@ import java.util.Objects;
 
 
 public class Unidad {
-    
+
     private int id;
     private String codigo;
     private String nombre;
     private String observaciones;
-     int idcurso;
-     int idtutor;
-     int idaula;
+    int idcurso;
+    int idtutor;
+    int idaula;
+    String CodCurso;
+    String  DniTutor;
+
+    public String getCodCurso() {
+        return CodCurso;
+    }
+
+    public void setCodCurso(String CodCurso) {
+        this.CodCurso = CodCurso;
+    }
+
+    public String getDniTutor() {
+        return DniTutor;
+    }
+
+    public void setDniTutor(String DniTutor) {
+        this.DniTutor = DniTutor;
+    }
+
+    public String getCodAula() {
+        return CodAula;
+    }
+
+    public void setCodAula(String CodAula) {
+        this.CodAula = CodAula;
+    }
+    String CodAula;
 
     public Unidad(int id, String codigo, String nombre, String observaciones, int idcurso, int idtutor, int idaula) {
         this.id = id;
@@ -29,6 +56,8 @@ public class Unidad {
 
     public Unidad() {
     }
+    
+    
 
     public int getId() {
         return id;
@@ -89,11 +118,8 @@ public class Unidad {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + Objects.hashCode(this.codigo);
-        hash = 41 * hash + this.idcurso;
-        hash = 41 * hash + this.idtutor;
-        hash = 41 * hash + this.idaula;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
 
@@ -112,15 +138,6 @@ public class Unidad {
         if (this.id != other.id) {
             return false;
         }
-        if (this.idcurso != other.idcurso) {
-            return false;
-        }
-        if (this.idtutor != other.idtutor) {
-            return false;
-        }
-        if (this.idaula != other.idaula) {
-            return false;
-        }
         return Objects.equals(this.codigo, other.codigo);
     }
 
@@ -128,15 +145,7 @@ public class Unidad {
     public String toString() {
         return "Unidad{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", observaciones=" + observaciones + ", idcurso=" + idcurso + ", idtutor=" + idtutor + ", idaula=" + idaula + '}';
     }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+
+} 

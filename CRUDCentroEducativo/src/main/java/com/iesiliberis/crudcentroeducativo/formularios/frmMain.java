@@ -5,6 +5,7 @@
 package com.iesiliberis.crudcentroeducativo.formularios;
 
 import com.iesiliberis.crudcentroeducativo.controladorDAO.CursoAcademicoDaoImp;
+import com.iesiliberis.crudcentroeducativo.controladorDAO.CursoDaoImp;
 import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -26,7 +27,17 @@ import javax.swing.JRadioButtonMenuItem;
 public class frmMain extends javax.swing.JFrame {
 
     public int idCursoAcademico = 0;
-    
+
+    public static List<Integer> getIdsCursosByCursoAcademico(int idCursoAcademico) {
+        CursoDaoImp cursoDao = CursoDaoImp.getInstance();
+        List<Integer> idsCursos = null;
+        try {
+            idsCursos = cursoDao.getIDsByCursoAca(idCursoAcademico);
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return idsCursos;
+    }
 
     /**
      * Creates new form frmMain
@@ -35,7 +46,7 @@ public class frmMain extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         generaMenuCursosAcademicos();
-       
+
     }
 
     /*Genera y selecciona en el menu el año de forma desc, y se puede selecionar el resto de año, devuelve el 
@@ -61,7 +72,7 @@ public class frmMain extends javax.swing.JFrame {
                 brgCursoAcademico.add(jrCurso);
 
                 jrCurso.addItemListener(new ItemListener() {
-                public void itemStateChanged(ItemEvent e) {
+                    public void itemStateChanged(ItemEvent e) {
                         JRadioButtonMenuItem jrbSelected = (JRadioButtonMenuItem) e.getItem();
                         int idCursoAcademicoSeleccionado = Integer.parseInt(jrbSelected.getName());
                         idCursoAcademico = idCursoAcademicoSeleccionado;
@@ -77,9 +88,6 @@ public class frmMain extends javax.swing.JFrame {
         }
 
     }
-    
-    
-    
 
     /* hace que solo se pueda abrir una venta, en la opcion de menu hay que añadir este metodo */
     public void mostrarIFrame(JDesktopPane pnl, JInternalFrame ji) {
@@ -282,16 +290,16 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_optmAcercaActionPerformed
 
     private void menuCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCursoActionPerformed
-     
-    fmrCurso cur;
+
+        fmrCurso cur;
         try {
             cur = new fmrCurso(idCursoAcademico);
             mostrarIFrame(pndEscritorio, cur);
         } catch (SQLException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-         
+
+
     }//GEN-LAST:event_menuCursoActionPerformed
 
     private void optmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optmAlumnoActionPerformed
@@ -312,14 +320,14 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_optmCursoAcademicoActionPerformed
 
     private void optmAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optmAulaActionPerformed
-        
+
         frIAula aula = new frIAula();
         mostrarIFrame(pndEscritorio, aula);
-        
+
     }//GEN-LAST:event_optmAulaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        fmrUnidades uni = new fmrUnidades();
+        fmrUnidad uni = new fmrUnidad(getIdsCursosByCursoAcademico(idCursoAcademico));
         mostrarIFrame(pndEscritorio, uni);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -329,7 +337,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonalActualActionPerformed
 
     private void PersonalAntiguoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalAntiguoActionPerformed
-       frmPersonalAntiguo personal = new frmPersonalAntiguo();
+        frmPersonalAntiguo personal = new frmPersonalAntiguo();
         mostrarIFrame(pndEscritorio, personal);
     }//GEN-LAST:event_PersonalAntiguoActionPerformed
 

@@ -242,5 +242,30 @@ public class PersonalDaoImp implements PersonalDao {
         
         return result;
     }
+
+    @Override
+    public int getIdByDni(String dni) throws SQLException {
+        int id =0;
+        String sql="select id from personal where dni=?";
+
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+        
+            pstm.setString(1, dni);
+            
+            ResultSet rs=pstm.executeQuery();
+            
+            if (rs.next()){
+                
+                id = rs.getInt("id");
+                
+                
+                
+            }
+            
+        }
+        
+        return id;
+    }
     
 }

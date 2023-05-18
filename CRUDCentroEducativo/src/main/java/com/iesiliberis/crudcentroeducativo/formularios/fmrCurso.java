@@ -37,6 +37,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtCursos.setModel(modelo);
         jtCursos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
     }
 
     private void mostrarValoresEnTabla() {
@@ -64,22 +65,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         }
     }
 
-    /*
-    public void mostrarValoresEnTabla() throws SQLException {
-        
-    CursoDaoImp curso1 = CursoDaoImp.getInstance();
-    List<Curso> cursos = curso1.getAllByCursoAcademico(idCursoAcademico);
     
-    DefaultTableModel model = (DefaultTableModel) jtCursos.getModel();
-    model.setRowCount(0);
-
-    for (Curso curso : cursos) {
-        Object[] row = {curso.getId(), curso.getCodigo(), curso.getNombre(), curso.getObservaciones(), curso.getIdcursoacademico()};
-        model.addRow(row);
-    }
-    
-}
-     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,6 +122,16 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 "Id", "Codigo", "Nombre", "Observaciones", "idCursoAcademico"
             }
         ));
+        jtCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCursosMouseClicked(evt);
+            }
+        });
+        jtCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtCursosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtCursos);
 
         btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
@@ -178,9 +174,9 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnAnadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -328,14 +324,15 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    
+//Oculto campos, muestro mesaje de confirmacion tras coger cada fila actualizando sus valores vuelvo a cargar tabla
     private void btnAceptarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditActionPerformed
         btnAceptarEdit.setVisible(false);
 
         CursoDaoImp cur = CursoDaoImp.getInstance();
         try {
             cur.update(getCampos());
-            JOptionPane.showMessageDialog(this, "Aula actualizado correctamente");
+            JOptionPane.showMessageDialog(this, "Curso actualizado correctamente");
             int fila = jtCursos.getSelectedRow();
             mostrarValoresEnTabla();
             jtCursos.setRowSelectionInterval(fila, fila);
@@ -344,6 +341,10 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         }
         pnlCampos.setVisible(false);
     }//GEN-LAST:event_btnAceptarEditActionPerformed
+
+    private void jtCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCursosMouseClicked
+        setCampos();
+    }//GEN-LAST:event_jtCursosMouseClicked
 
     private Curso getCampos() {
 
@@ -358,9 +359,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
     }
 
     private void setCampos() {
-        if (jtCursos.getSelectedRow() == -1) {
-            return;
-        }
+        
 
         txtId.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 0).toString());
         txtCodigo.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 1).toString());

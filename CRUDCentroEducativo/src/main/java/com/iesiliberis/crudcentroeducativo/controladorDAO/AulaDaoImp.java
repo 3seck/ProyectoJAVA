@@ -55,7 +55,7 @@ public class AulaDaoImp implements AulaDao {
     @Override
     public Aula getById(int id) throws SQLException {
         Aula aula=null;
-        String sql="select * aula where id=?";
+        String sql="select * from aula where id=?";
 
         try(Connection cn=MyDataSource.getConnection();
             PreparedStatement pstm=cn.prepareStatement(sql);){
@@ -141,6 +141,28 @@ public class AulaDaoImp implements AulaDao {
             
         }
 
+    }
+
+    @Override
+    public int getByCodigo(String codigo) throws SQLException {
+        int id=0;
+        String sql="select id from aula where codigo=?";
+
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+        
+            pstm.setString(1, codigo);
+            
+            ResultSet rs=pstm.executeQuery();
+            
+            if (rs.next()){
+                id = rs.getInt("id");
+                
+                
+            }
+       
+        }  
+        return id;
     }
     
 }

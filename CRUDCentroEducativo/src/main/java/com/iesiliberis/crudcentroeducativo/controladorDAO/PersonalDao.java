@@ -27,4 +27,6 @@ public interface PersonalDao {
     int moverAntiguo(Personal a) throws  SQLException;
     
     List<Personal> getAllAntiguos()  throws SQLException;
+    
+    int getIdByDni(String dni) throws SQLException;
 }

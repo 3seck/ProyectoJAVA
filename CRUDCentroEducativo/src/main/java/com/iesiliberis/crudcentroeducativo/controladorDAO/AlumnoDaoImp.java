@@ -6,13 +6,10 @@ package com.iesiliberis.crudcentroeducativo.controladorDAO;
 
 import com.iesiliberis.crudcentroeducativo.BD.MyDataSource;
 import com.iesiliberis.crudcentroeducativo.entidades.Alumno;
-import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,7 +168,45 @@ public class AlumnoDaoImp implements AlumnoDao {
 
     @Override
     public void delete(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM alumno WHERE id=?";
+        int result = 0;
+        
+        try (Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);) {
+            
+            pstm.setInt(1, id);
+            result = pstm.executeUpdate();
+            
+        }
+    }
+
+    @Override
+    public int alumnoAntiguo(Alumno a) throws SQLException {
+        String sql="""
+                  insert into alumnoantiguo(dni,nombre,apellido1,apellido2,fNacimiento,telefono,email,direccion,cp,poblacion,provincia)
+                  values (?,?,?,?,?,?,?,?,?,?,?)
+                  """;
+      int result=0;
+       
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+        
+            pstm.setString(1, a.getDni());
+            pstm.setString(2, a.getNombre());
+            pstm.setString(3, a.getApellido1());
+            pstm.setString(4, a.getApellido2());
+            pstm.setString(5, a.getFnacimiento().toString());
+            pstm.setString(6, a.getTelefono());
+            pstm.setString(7, a.getEmail());
+            pstm.setString(8, a.getDireccion());
+            pstm.setString(9, a.getCp());
+            pstm.setString(10, a.getPoblacion());
+            pstm.setString(11, a.getProvincia());
+            result=pstm.executeUpdate();
+            
+        }
+        
+        return result;
     }
     
 }

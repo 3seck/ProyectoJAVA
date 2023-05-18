@@ -24,4 +24,8 @@ public interface AulaDao {
     int update(Aula a)  throws SQLException;
     
     void delete(int id)  throws SQLException;
+    
+    int getByCodigo(String codigo) throws SQLException;
+    
+    
 }
