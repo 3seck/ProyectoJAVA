@@ -6,25 +6,19 @@ package com.iesiliberis.crudcentroeducativo.entidades;
 
 import java.util.Date;
 
-
-
 public class Matricula {
-    
+
     private int idmatricula;
-     int idalumno;
-     int idunidad;
-    private  String descripcion;
+    int idalumno;
+    int idunidad;
+    private String descripcion;
     private Date fMatricula;
     private Date fBaja;
-        String dniAlumno;
-        String codUnidad;
+    String dniAlumno;
+    String codUnidad;
 
-        
-        
     public Matricula() {
     }
-    
-    
 
     public Matricula(int idmatricula, int idalumno, int idunidad, String descripcion) {
         this.idmatricula = idmatricula;
@@ -57,8 +51,6 @@ public class Matricula {
     public void setCodUnidad(String codUnidad) {
         this.codUnidad = codUnidad;
     }
-    
-    
 
     public int getIdmatricula() {
         return idmatricula;
@@ -143,11 +135,4 @@ public class Matricula {
         return "Matricula{" + "idmatricula=" + idmatricula + ", idalumno=" + idalumno + ", idunidad=" + idunidad + ", descripcion=" + descripcion + ", fMatricula=" + fMatricula + ", fBaja=" + fBaja + '}';
     }
 
-    
-    
-    
-    
-    
-    
-    
 }

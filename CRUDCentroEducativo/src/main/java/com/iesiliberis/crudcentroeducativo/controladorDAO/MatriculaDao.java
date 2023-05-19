@@ -25,4 +25,10 @@ public interface MatriculaDao {
     void delete(int id)  throws SQLException;
     
     List<Matricula> getbyAlumno(int idAlumno)  throws SQLException;
+    
+    List<Matricula> getByUnidadCodigo(String codigoUnidad) throws SQLException;
+    
+    int  getIdByCodUnidadyDni(String codUnidad, String dni) throws SQLException;
+    
+     int darBaja( int id) throws SQLException;
 }

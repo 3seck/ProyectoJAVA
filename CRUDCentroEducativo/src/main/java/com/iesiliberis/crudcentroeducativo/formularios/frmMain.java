@@ -140,7 +140,9 @@ public class frmMain extends javax.swing.JFrame {
         PersonalActual = new javax.swing.JMenuItem();
         PersonalAntiguo = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuAdministrarmatriculas = new javax.swing.JMenu();
         menuMatriculas = new javax.swing.JMenuItem();
+        jmenuBajamMatriculas = new javax.swing.JMenuItem();
         jmCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -244,13 +246,25 @@ public class frmMain extends javax.swing.JFrame {
         });
         editMenu.add(jMenuItem1);
 
+        menuAdministrarmatriculas.setText("AdministrarMatriculas");
+
         menuMatriculas.setText("Matriculas");
         menuMatriculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMatriculasActionPerformed(evt);
             }
         });
-        editMenu.add(menuMatriculas);
+        menuAdministrarmatriculas.add(menuMatriculas);
+
+        jmenuBajamMatriculas.setText("DarBaja");
+        jmenuBajamMatriculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuBajamMatriculasActionPerformed(evt);
+            }
+        });
+        menuAdministrarmatriculas.add(jmenuBajamMatriculas);
+
+        editMenu.add(menuAdministrarmatriculas);
 
         menuBar.add(editMenu);
 
@@ -358,6 +372,11 @@ public class frmMain extends javax.swing.JFrame {
         mostrarIFrame(pndEscritorio, mrt);
     }//GEN-LAST:event_menuMatriculasActionPerformed
 
+    private void jmenuBajamMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuBajamMatriculasActionPerformed
+        fmrBajaMatricula baja = new fmrBajaMatricula(getIdsCursosByCursoAcademico(idCursoAcademico));
+        mostrarIFrame(pndEscritorio, baja);
+    }//GEN-LAST:event_jmenuBajamMatriculasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,6 +423,8 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmCursoAcademico;
+    private javax.swing.JMenuItem jmenuBajamMatriculas;
+    private javax.swing.JMenu menuAdministrarmatriculas;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuCurso;
     private javax.swing.JMenuItem menuMatriculas;

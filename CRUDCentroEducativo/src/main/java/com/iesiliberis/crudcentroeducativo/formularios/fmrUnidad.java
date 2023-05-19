@@ -288,6 +288,11 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         btnAtras.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
 
         btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\delete.png")); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -428,10 +433,6 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void btnConfirmarDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDeleteActionPerformed
-
-    }//GEN-LAST:event_btnConfirmarDeleteActionPerformed
-
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         btnGuardar.setVisible(true);
         btnConfirmarEdit.setVisible(false);
@@ -477,6 +478,14 @@ public class fmrUnidad extends javax.swing.JInternalFrame {
     private void jtUnidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtUnidadMouseClicked
         setCampos();
     }//GEN-LAST:event_jtUnidadMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnConfirmarDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDeleteActionPerformed
+
+    }//GEN-LAST:event_btnConfirmarDeleteActionPerformed
 
     private Unidad getCamposAdd() {
         Unidad uni = new Unidad();
