@@ -28,11 +28,13 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
     /**
      * Creates new form fmrMatricula
      */
+    int cursoaca;
     private List<Integer> idsCursos;
     MatriculaDaoImp matriculaControler = MatriculaDaoImp.getInstance();
-    public fmrMatricula(List<Integer> idsCursos) {
+    public fmrMatricula(List<Integer> idsCursos, int cursoaca) {
         initComponents();
         this.idsCursos = idsCursos;
+        this.cursoaca = cursoaca;
         configTablaAlumnos();
         configTablaUnidades();
         mostrarValoresEnTablaUnidades();
@@ -127,8 +129,9 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         String[] fila = new String[3];
 
         modelo.setNumRows(0);
-        try {           
-            List<Matricula> lst = matriculaControler.getAll();
+        try {    
+            
+            List<Matricula> lst = matriculaControler.getMatriculaByCursoAca(cursoaca);
 
             for (Matricula mat : lst) {
                 Alumno alum = alumControler.getById(mat.getIdalumno());
@@ -139,6 +142,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
                 fila[2] = uni.getCodigo();
 
                 modelo.addRow(fila);
+            
             }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());

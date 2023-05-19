@@ -368,7 +368,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_PersonalAntiguoActionPerformed
 
     private void menuMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMatriculasActionPerformed
-        fmrMatricula mrt = new fmrMatricula(getIdsCursosByCursoAcademico(idCursoAcademico));
+        fmrMatricula mrt = new fmrMatricula(getIdsCursosByCursoAcademico(idCursoAcademico),idCursoAcademico);
         mostrarIFrame(pndEscritorio, mrt);
     }//GEN-LAST:event_menuMatriculasActionPerformed
 

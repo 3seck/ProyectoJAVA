@@ -157,7 +157,7 @@ public class UnidadDaoImp implements UnidadDao {
     @Override
     public List<Unidad> getByCursoAca(int idcurso) throws SQLException {
         Unidad uni = null;
-        String sql = "select * from unidad where idcurso = ? ";
+        String sql = " select * from unidad where idcurso = ?";
 
         List<Unidad> result = new ArrayList();
 

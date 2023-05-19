@@ -11,6 +11,7 @@ import com.iesiliberis.crudcentroeducativo.entidades.Alumno;
 import com.iesiliberis.crudcentroeducativo.entidades.Matricula;
 import com.iesiliberis.crudcentroeducativo.entidades.Unidad;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,8 +20,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import java.text.SimpleDateFormat;
-
 
 /**
  *
@@ -44,7 +43,7 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
     }
 
     private void configTablaVerMatriculados() {
-        String col[] = {"id", "nombre", "dni", "codigo", "fAlta"};
+        String col[] = {"id", "nombre", "dni", "codigo","descripcion", "fAlta"};
         DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtVerMatriculados.setModel(modelo);
         jtVerMatriculados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -55,12 +54,12 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
 
         AlumnoDaoImp alumControler = AlumnoDaoImp.getInstance();
         UnidadDaoImp unidadControler = UnidadDaoImp.getInstance();
-        String[] fila = new String[5];
+        String[] fila = new String[6];
 
         modelo.setNumRows(0);
         try {
             List<Matricula> lst = matriculaControler.getAll();
-
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             for (Matricula mat : lst) {
                 Alumno alum = alumControler.getById(mat.getIdalumno());
                 Unidad uni = unidadControler.getById(mat.getIdunidad());
@@ -70,7 +69,7 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
                 fila[2] = alum.getDni();
                 fila[3] = uni.getCodigo();
                 fila[4] = mat.getDescripcion();
-                
+                fila[5] = dateFormat.format(mat.getfMatricula());
 
                 modelo.addRow(fila);
             }
@@ -216,8 +215,8 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addComponent(txtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                         .addComponent(btnDarBaja))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(304, 304, 304)
@@ -279,7 +278,7 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
 
         try {
             int filaSeleccionada = jtVerMatriculados.getSelectedRow();
-            int idMatricula = Integer.parseInt((String) jtVerMatriculados.getValueAt(filaSeleccionada, 0));        
+            int idMatricula = Integer.parseInt((String) jtVerMatriculados.getValueAt(filaSeleccionada, 0));
             matriculaControler.darBaja(idMatricula);
             matriculaControler.delete(idMatricula);
             JOptionPane.showMessageDialog(null, "Matricula dada de baja");
@@ -293,7 +292,6 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA PARA DAR DE BAJA");
         pnlDelete.setVisible(true);
     }//GEN-LAST:event_btnDarBajaActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

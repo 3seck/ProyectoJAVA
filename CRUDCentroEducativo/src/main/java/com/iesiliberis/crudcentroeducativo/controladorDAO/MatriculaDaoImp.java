@@ -6,6 +6,7 @@ package com.iesiliberis.crudcentroeducativo.controladorDAO;
 
 import com.iesiliberis.crudcentroeducativo.BD.MyDataSource;
 import com.iesiliberis.crudcentroeducativo.entidades.Matricula;
+import com.iesiliberis.crudcentroeducativo.entidades.Unidad;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -227,7 +228,6 @@ public class MatriculaDaoImp implements MatriculaDao {
         try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
 
             pstm.setInt(1, id);
-            
 
             result = pstm.executeUpdate();
         }
@@ -261,6 +261,41 @@ public class MatriculaDaoImp implements MatriculaDao {
         }
 
         return idMatricula;
+    }
+
+    @Override
+    public List<Matricula> getMatriculaByCursoAca(int idcursoaca) throws SQLException {
+        Matricula matri = null;
+        String sql = """
+                     SELECT m.*
+                     FROM matricula m 
+                     inner JOIN unidad ON m.idunidad = unidad.id
+                     inner join curso on curso.id=unidad.idcurso
+                     inner join cursoacademico on  cursoacademico.id=curso.idcursoacademico
+                     where cursoacademico.id=?""";
+
+        List<Matricula> result = new ArrayList();
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            pstm.setInt(1, idcursoaca);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                matri = new Matricula();
+
+                matri.setIdmatricula(rs.getInt("idmatricula"));
+                matri.setIdalumno(rs.getInt("idalumno"));
+                matri.setIdunidad(rs.getInt("idunidad"));
+                matri.setDescripcion(rs.getString("descripcion"));
+                matri.setfMatricula(rs.getDate("fMatricula"));
+                matri.setfBaja(rs.getDate("fBaja"));
+                result.add(matri);
+            }
+
+        }
+
+        return result;
     }
 
 }

@@ -30,5 +30,7 @@ public interface MatriculaDao {
     
     int  getIdByCodUnidadyDni(String codUnidad, String dni) throws SQLException;
     
-     int darBaja( int id) throws SQLException;
+    int darBaja( int id) throws SQLException;
+    
+    public List<Matricula> getMatriculaByCursoAca(int idcurso) throws SQLException;
 }
