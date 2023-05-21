@@ -26,4 +26,6 @@ public interface AlumnoDao {
     int alumnoAntiguo(Alumno a) throws SQLException;
     
     int getByDni(String dni) throws SQLException;
+    
+     List<Alumno> getAllAntiguos()  throws SQLException;
 }

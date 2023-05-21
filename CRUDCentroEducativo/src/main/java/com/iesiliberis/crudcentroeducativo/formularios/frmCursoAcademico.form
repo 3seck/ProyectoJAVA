@@ -130,6 +130,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jpcampos">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jpcamposPropertyChange"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -162,7 +165,7 @@
                               <Component id="txtDescripcion" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace pref="138" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

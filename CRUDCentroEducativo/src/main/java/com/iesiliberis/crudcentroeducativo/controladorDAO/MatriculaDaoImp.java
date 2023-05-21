@@ -6,7 +6,6 @@ package com.iesiliberis.crudcentroeducativo.controladorDAO;
 
 import com.iesiliberis.crudcentroeducativo.BD.MyDataSource;
 import com.iesiliberis.crudcentroeducativo.entidades.Matricula;
-import com.iesiliberis.crudcentroeducativo.entidades.Unidad;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -97,7 +96,7 @@ public class MatriculaDaoImp implements MatriculaDao {
     @Override
     public List<Matricula> getAll() throws SQLException {
         Matricula matri = null;
-        String sql = "select distinct * from matricula ";
+        String sql = "select * from matricula ";
 
         List<Matricula> result = new ArrayList();
 

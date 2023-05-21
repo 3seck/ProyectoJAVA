@@ -125,6 +125,14 @@ public class frmMain extends javax.swing.JFrame {
 
         jMenuItem2 = new javax.swing.JMenuItem();
         pndEscritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -134,7 +142,6 @@ public class frmMain extends javax.swing.JFrame {
         editMenu = new javax.swing.JMenu();
         optmCursoAcademico = new javax.swing.JMenuItem();
         menuCurso = new javax.swing.JMenuItem();
-        optmAlumno = new javax.swing.JMenuItem();
         optmAula = new javax.swing.JMenuItem();
         menuPersonal = new javax.swing.JMenu();
         PersonalActual = new javax.swing.JMenuItem();
@@ -143,6 +150,9 @@ public class frmMain extends javax.swing.JFrame {
         menuAdministrarmatriculas = new javax.swing.JMenu();
         menuMatriculas = new javax.swing.JMenuItem();
         jmenuBajamMatriculas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        optmAlumno = new javax.swing.JMenuItem();
+        jMneuAlumnosAntiguos = new javax.swing.JMenuItem();
         jmCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -151,6 +161,46 @@ public class frmMain extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel1.setText("1. Seleccion un Año Academico");
+        pndEscritorio.add(jLabel1);
+        jLabel1.setBounds(80, 60, 230, 19);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel2.setText("2. Añade un Curso ");
+        pndEscritorio.add(jLabel2);
+        jLabel2.setBounds(80, 90, 160, 19);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel3.setText("3.Añade un Aula");
+        pndEscritorio.add(jLabel3);
+        jLabel3.setBounds(80, 120, 120, 19);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel4.setText("4.Añade al Personal");
+        pndEscritorio.add(jLabel4);
+        jLabel4.setBounds(80, 150, 170, 19);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel5.setText("5.Añade las Unidades");
+        pndEscritorio.add(jLabel5);
+        jLabel5.setBounds(80, 180, 180, 19);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel6.setText("6.Añade a los Alumnos");
+        pndEscritorio.add(jLabel6);
+        jLabel6.setBounds(80, 210, 180, 19);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel7.setText("7.Añade las matriculas");
+        pndEscritorio.add(jLabel7);
+        jLabel7.setBounds(80, 240, 210, 19);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        jLabel8.setText("Siga las instrucciones de uso: ");
+        pndEscritorio.add(jLabel8);
+        jLabel8.setBounds(30, 5, 360, 40);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Parametrizacion");
@@ -199,16 +249,6 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
         editMenu.add(menuCurso);
-
-        optmAlumno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        optmAlumno.setMnemonic('p');
-        optmAlumno.setText("Alumnos");
-        optmAlumno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optmAlumnoActionPerformed(evt);
-            }
-        });
-        editMenu.add(optmAlumno);
 
         optmAula.setText("Aula");
         optmAula.addActionListener(new java.awt.event.ActionListener() {
@@ -266,6 +306,28 @@ public class frmMain extends javax.swing.JFrame {
 
         editMenu.add(menuAdministrarmatriculas);
 
+        jMenu1.setText("Opciones de Alumnos");
+
+        optmAlumno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        optmAlumno.setMnemonic('p');
+        optmAlumno.setText("Alumnos");
+        optmAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optmAlumnoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(optmAlumno);
+
+        jMneuAlumnosAntiguos.setText("AlumnosAntiguos");
+        jMneuAlumnosAntiguos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMneuAlumnosAntiguosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMneuAlumnosAntiguos);
+
+        editMenu.add(jMenu1);
+
         menuBar.add(editMenu);
 
         jmCursoAcademico.setText("Año Academico");
@@ -296,11 +358,11 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pndEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+            .addComponent(pndEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pndEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+            .addComponent(pndEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
 
         pack();
@@ -373,9 +435,15 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_menuMatriculasActionPerformed
 
     private void jmenuBajamMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuBajamMatriculasActionPerformed
-        fmrBajaMatricula baja = new fmrBajaMatricula(getIdsCursosByCursoAcademico(idCursoAcademico));
+        fmrBajaMatricula baja = new fmrBajaMatricula(getIdsCursosByCursoAcademico(idCursoAcademico),idCursoAcademico);
         mostrarIFrame(pndEscritorio, baja);
     }//GEN-LAST:event_jmenuBajamMatriculasActionPerformed
+
+    private void jMneuAlumnosAntiguosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMneuAlumnosAntiguosActionPerformed
+        
+        fmrAlumnosAntiguos alum = new fmrAlumnosAntiguos();
+        mostrarIFrame(pndEscritorio, alum);
+    }//GEN-LAST:event_jMneuAlumnosAntiguosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -420,8 +488,18 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMneuAlumnosAntiguos;
     private javax.swing.JMenu jmCursoAcademico;
     private javax.swing.JMenuItem jmenuBajamMatriculas;
     private javax.swing.JMenu menuAdministrarmatriculas;

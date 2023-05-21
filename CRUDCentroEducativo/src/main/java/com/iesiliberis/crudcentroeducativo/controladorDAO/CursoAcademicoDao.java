@@ -23,4 +23,5 @@ public interface CursoAcademicoDao {
     
     void delete(int id)  throws SQLException;
     
+    int getIdByDescripcion(String descripcion) throws SQLException;
 }

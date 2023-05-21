@@ -30,12 +30,14 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
     /**
      * Creates new form fmrBajaMatricula
      */
+    int cursoAca;
     private List<Integer> idsCursos;
     MatriculaDaoImp matriculaControler = MatriculaDaoImp.getInstance();
 
-    public fmrBajaMatricula(List<Integer> idsCursos) {
+    public fmrBajaMatricula(List<Integer> idsCursos, int cursoAca) {
         initComponents();
         this.idsCursos = idsCursos;
+        this.cursoAca = cursoAca;
         configTablaVerMatriculados();
         mostrarValoresEnTablaVerMatriculados();
         setCampos();
@@ -58,7 +60,7 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
 
         modelo.setNumRows(0);
         try {
-            List<Matricula> lst = matriculaControler.getAll();
+            List<Matricula> lst = matriculaControler.getMatriculaByCursoAca(cursoAca);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             for (Matricula mat : lst) {
                 Alumno alum = alumControler.getById(mat.getIdalumno());
@@ -86,11 +88,14 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
     }
 
     private void setCampos() {
-        txtNombre.setText(jtVerMatriculados.getValueAt(jtVerMatriculados.getSelectedRow(), 0).toString());
-        txtDni.setText(jtVerMatriculados.getValueAt(jtVerMatriculados.getSelectedRow(), 1).toString());
-        txtCodigo.setText(jtVerMatriculados.getValueAt(jtVerMatriculados.getSelectedRow(), 2).toString());
-        txtfMatricula.setText(jtVerMatriculados.getValueAt(jtVerMatriculados.getSelectedRow(), 3).toString());
+    int filaSeleccionada = jtVerMatriculados.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        txtNombre.setText(jtVerMatriculados.getValueAt(filaSeleccionada, 0).toString());
+        txtDni.setText(jtVerMatriculados.getValueAt(filaSeleccionada, 1).toString());
+        txtCodigo.setText(jtVerMatriculados.getValueAt(filaSeleccionada, 2).toString());
+        txtfMatricula.setText(jtVerMatriculados.getValueAt(filaSeleccionada, 3).toString());
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +117,9 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
         btnConfirmarDelete = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtfMatricula = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -201,23 +209,18 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
 
         txtfMatricula.setText("b");
 
+        jLabel1.setText("Nombre");
+
+        jLabel2.setText("Dni");
+
+        jLabel3.setText("Unidad");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnDarBaja))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(304, 304, 304)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +229,27 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(pnlDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(25, 25, 25)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnDarBaja))
+                            .addComponent(jLabel3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -236,7 +259,12 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,7 +273,7 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
                     .addComponent(txtfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,7 +325,10 @@ public class fmrBajaMatricula extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarDelete;
     private javax.swing.JButton btnDarBaja;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jtVerMatriculados;
     private javax.swing.JPanel pnlDelete;

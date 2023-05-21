@@ -26,7 +26,7 @@ public interface UnidadDao {
     
     int getIdByCod(String codigo) throws SQLException;
     
-
+    int unidadAntigua(Unidad a) throws SQLException;
     
     
 }

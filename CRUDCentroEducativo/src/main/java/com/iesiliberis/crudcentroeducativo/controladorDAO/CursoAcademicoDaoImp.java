@@ -20,125 +20,137 @@ import java.util.List;
 public class CursoAcademicoDaoImp implements CursoAcademicoDao {
 
     private static CursoAcademicoDaoImp instance;
-    
-    static{
-        instance=new CursoAcademicoDaoImp();
+
+    static {
+        instance = new CursoAcademicoDaoImp();
     }
-    
-    private CursoAcademicoDaoImp(){ }
-    
-    public static CursoAcademicoDaoImp getInstance(){
+
+    private CursoAcademicoDaoImp() {
+    }
+
+    public static CursoAcademicoDaoImp getInstance() {
         return instance;
     }
-        
+
     @Override
     public int add(CursoAcademico c) throws SQLException {
 
-      String sql="""
+        String sql = """
                   insert into cursoacademico(yearinicio,yearfin,descripcion)
                   values (?,?,?)
                   """;
-      int result=0;
-       
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-        
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
             pstm.setInt(1, c.getYearinicio());
             pstm.setInt(2, c.getYearfin());
             pstm.setString(3, c.getDescripcion());
-            
-            result=pstm.executeUpdate();
-            
+
+            result = pstm.executeUpdate();
+
         }
-        
+
         return result;
-        
-        
+
     }
 
     @Override
     public CursoAcademico getById(int id) throws SQLException {
-        CursoAcademico cursoaca=null;
-        String sql="select * from cursoacademico where id=?";
+        CursoAcademico cursoaca = null;
+        String sql = "select * from cursoacademico where id=?";
 
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-        
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
             pstm.setInt(1, id);
-            
-            ResultSet rs=pstm.executeQuery();
-            
-            if (rs.next()){
-                cursoaca=new CursoAcademico();
-                
+
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                cursoaca = new CursoAcademico();
+
                 cursoaca.setId(rs.getInt("id"));
                 cursoaca.setYearinicio(rs.getInt("yearinicio"));
                 cursoaca.setYearfin(rs.getInt("yearfin"));
                 cursoaca.setDescripcion(rs.getString("descripcion"));
-                
+
             }
-            
+
         }
-        
+
         return cursoaca;
     }
 
     @Override
     public List<CursoAcademico> getAll() throws SQLException {
-        CursoAcademico cursoaca=null;
-        String sql="select distinct * from cursoacademico order by yearinicio desc";
-        
-        List<CursoAcademico> result=new ArrayList();
+        CursoAcademico cursoaca = null;
+        String sql = "select distinct * from cursoacademico order by yearinicio desc";
 
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-         
-            ResultSet rs=pstm.executeQuery();
-            
-            while (rs.next()){
-                cursoaca=new CursoAcademico();
-                
+        List<CursoAcademico> result = new ArrayList();
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                cursoaca = new CursoAcademico();
+
                 cursoaca.setId(rs.getInt("id"));
                 cursoaca.setYearinicio(rs.getInt("yearinicio"));
                 cursoaca.setYearfin(rs.getInt("yearfin"));
                 cursoaca.setDescripcion(rs.getString("descripcion"));
                 result.add(cursoaca);
             }
-            
+
         }
-        
-        return result; 
+
+        return result;
     }
 
     @Override
     public int update(CursoAcademico c) throws SQLException {
 
-        String sql="""
+        String sql = """
                   update cursoacademico
                   set yearinicio=?, yearfin=?, descripcion=?
                    where id=?
                    """;
-      int result=0;
-       
-        try(Connection cn=MyDataSource.getConnection();
-            PreparedStatement pstm=cn.prepareStatement(sql);){
-            
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
             pstm.setInt(1, c.getYearinicio());
             pstm.setInt(2, c.getYearfin());
             pstm.setString(3, c.getDescripcion());
             pstm.setInt(4, c.getId());
-            
-            result=pstm.executeUpdate();
-            
+
+            result = pstm.executeUpdate();
+
         }
-        
+
         return result;
-      
+
     }
 
     @Override
     public void delete(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    @Override
+    public int getIdByDescripcion(String descripcion) throws SQLException {
+        String sql = "SELECT id FROM curso WHERE descripcion = ?";
+        int id = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql)) {
+            
+            pstm.setString(1, descripcion);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        }
+        return id;
+    }
+
 }

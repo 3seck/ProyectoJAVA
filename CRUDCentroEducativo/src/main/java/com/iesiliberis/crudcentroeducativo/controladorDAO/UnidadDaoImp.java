@@ -151,7 +151,15 @@ public class UnidadDaoImp implements UnidadDao {
 
     @Override
     public void delete(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM unidad WHERE id=?";
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+
+            pstm.setInt(1, id);
+            result = pstm.executeUpdate();
+
+        }
     }
 
     @Override
@@ -189,8 +197,7 @@ public class UnidadDaoImp implements UnidadDao {
         String sql = "select id from unidad where codigo=?";
         int id = 0;
 
-        try ( Connection cn = MyDataSource.getConnection(); 
-              PreparedStatement pstm = cn.prepareStatement(sql);) {
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
 
             pstm.setString(1, codigo);
 
@@ -203,6 +210,30 @@ public class UnidadDaoImp implements UnidadDao {
             }
         }
         return id;
+    }
+
+    @Override
+    public int unidadAntigua(Unidad a) throws SQLException {
+        
+        
+
+        // Crear la consulta SQL para agregar la unidad
+        String sql = "INSERT INTO unidadantigua (codigo, nombre, Observaciones, idcurso, idtutor, idaula) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+        int result = 0;
+
+        try ( Connection cn = MyDataSource.getConnection();  PreparedStatement pstm = cn.prepareStatement(sql);) {
+            pstm.setString(1, a.getCodigo());
+            pstm.setString(2, a.getNombre());
+            pstm.setString(3, a.getObservaciones());
+            pstm.setInt(4, a.getIdcurso());
+            pstm.setInt(5, a.getIdtutor());
+            pstm.setInt(6, a.getIdaula());
+
+            result = pstm.executeUpdate();
+        }
+
+        return result;
     }
 
 }

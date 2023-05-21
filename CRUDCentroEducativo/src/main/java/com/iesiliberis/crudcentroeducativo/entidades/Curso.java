@@ -14,6 +14,15 @@ public class Curso {
     private String nombre;
     private String observaciones;
     int idcursoacademico;
+    String descricionCursoAca;
+
+    public String getDescricionCursoAca() {
+        return descricionCursoAca;
+    }
+
+    public void setDescricionCursoAca(String descricionCursoAca) {
+        this.descricionCursoAca = descricionCursoAca;
+    }
 
     
     public Curso( String codigo, String nombre, String observaciones, int idcursoacademico) {

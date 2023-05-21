@@ -31,6 +31,8 @@ public class CursoDaoImp implements CursoDao {
 
     @Override
     public int add(Curso c) throws SQLException {
+           
+        
         String sql = """
                   insert into curso(codigo,nombre,Observaciones,idcursoacademico)
                   values (?,?,?,?)
@@ -153,7 +155,17 @@ public class CursoDaoImp implements CursoDao {
 
     @Override
     public void delete(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM curso WHERE id=?";
+        int result = 0;
+        
+        try (Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);) {
+            
+            pstm.setInt(1, id);
+            result = pstm.executeUpdate();
+            
+        }
+    
     }
 
     @Override

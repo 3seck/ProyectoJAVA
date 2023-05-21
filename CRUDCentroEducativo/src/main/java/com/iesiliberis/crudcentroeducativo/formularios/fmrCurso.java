@@ -4,8 +4,10 @@
  */
 package com.iesiliberis.crudcentroeducativo.formularios;
 
+import com.iesiliberis.crudcentroeducativo.controladorDAO.CursoAcademicoDaoImp;
 import com.iesiliberis.crudcentroeducativo.controladorDAO.CursoDaoImp;
 import com.iesiliberis.crudcentroeducativo.entidades.Curso;
+import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -53,6 +55,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 fila[2] = "" + curso.getNombre();
                 fila[3] = "" + curso.getObservaciones();
                 fila[4] = "" + curso.getIdcursoacademico();
+                
                 modelo.addRow(fila);
             }
             // Seleccionar la primera fila de la tabla
@@ -82,6 +85,8 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         btnAnadir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         pnlCampos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -94,6 +99,10 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         txtObservaciones = new javax.swing.JTextField();
         txtIdCursoAcademico = new javax.swing.JTextField();
         btnAceptarEdit = new javax.swing.JButton();
+        pnlDelete = new javax.swing.JPanel();
+        btnConfirmarDelete = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,6 +164,20 @@ public class fmrCurso extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\delete.png")); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,18 +188,26 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnAnadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnAnadir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -197,6 +228,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 txtIdActionPerformed(evt);
             }
         });
+        txtId.setVisible(false);
 
         btnAceptarEdit.setText("Aceptar");
         btnAceptarEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -262,33 +294,89 @@ public class fmrCurso extends javax.swing.JInternalFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        jLabel1.setVisible(false);
+        jLabel5.setVisible(false);
+        txtIdCursoAcademico.setVisible(false);
+
+        pnlDelete.setVisible(false);
+        pnlDelete.setBackground(new java.awt.Color(255, 0, 0));
+        pnlDelete.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        btnConfirmarDelete.setBackground(new java.awt.Color(255, 153, 153));
+        btnConfirmarDelete.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        btnConfirmarDelete.setText("Confirmar");
+        btnConfirmarDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jLabel15.setText("El curso seleccionado sera borrado");
+
+        javax.swing.GroupLayout pnlDeleteLayout = new javax.swing.GroupLayout(pnlDelete);
+        pnlDelete.setLayout(pnlDeleteLayout);
+        pnlDeleteLayout.setHorizontalGroup(
+            pnlDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDeleteLayout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addComponent(jLabel15))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDeleteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfirmarDelete)
+                .addGap(56, 56, 56))
+        );
+        pnlDeleteLayout.setVerticalGroup(
+            pnlDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDeleteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfirmarDelete)
+                .addGap(23, 23, 23))
+        );
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel6.setText("Cursos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 209, Short.MAX_VALUE)
+                                .addComponent(pnlDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(pnlCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(pnlCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,7 +389,7 @@ public class fmrCurso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -346,6 +434,33 @@ public class fmrCurso extends javax.swing.JInternalFrame {
         setCampos();
     }//GEN-LAST:event_jtCursosMouseClicked
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        pnlCampos.setVisible(false);
+        btnGuardar.setVisible(false);
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+         JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA PARA BORRAR");
+          pnlDelete.setVisible(true);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnConfirmarDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarDeleteActionPerformed
+        pnlDelete.setVisible(false);
+        CursoDaoImp curso = CursoDaoImp.getInstance();
+        int id = Integer.parseInt(txtId.getText());
+        try {
+            
+            curso.delete(id);
+            JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente");
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+        }
+        mostrarValoresEnTabla();
+    }//GEN-LAST:event_btnConfirmarDeleteActionPerformed
+
+   
+    
     private Curso getCampos() {
 
         Curso cur = new Curso();
@@ -359,31 +474,37 @@ public class fmrCurso extends javax.swing.JInternalFrame {
     }
 
     private void setCampos() {
-        
-
-        txtId.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 0).toString());
-        txtCodigo.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 1).toString());
-        txtNombre.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 2).toString());
-        txtObservaciones.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 3).toString());
-        txtIdCursoAcademico.setText(jtCursos.getValueAt(jtCursos.getSelectedRow(), 4).toString());
-
+    int filaSeleccionada = jtCursos.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        txtId.setText(jtCursos.getValueAt(filaSeleccionada, 0).toString());
+        txtCodigo.setText(jtCursos.getValueAt(filaSeleccionada, 1).toString());
+        txtNombre.setText(jtCursos.getValueAt(filaSeleccionada, 2).toString());
+        txtObservaciones.setText(jtCursos.getValueAt(filaSeleccionada, 3).toString());
+        txtIdCursoAcademico.setText(jtCursos.getValueAt(filaSeleccionada, 4).toString());
     }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarEdit;
     private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConfirmarDelete;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtCursos;
     private javax.swing.JPanel pnlCampos;
+    private javax.swing.JPanel pnlDelete;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdCursoAcademico;

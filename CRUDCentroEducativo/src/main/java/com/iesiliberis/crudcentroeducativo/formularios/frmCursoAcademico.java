@@ -9,11 +9,8 @@ import com.iesiliberis.crudcentroeducativo.entidades.CursoAcademico;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -43,15 +40,7 @@ public class frmCursoAcademico extends javax.swing.JFrame {
         DefaultTableModel modelo=new DefaultTableModel(col,0);
         jtCursos.setModel(modelo);
         jtCursos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                
-        //configuro evento valor cambiado...
-/*        jtCursos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            System.out.println(jtCursos.getValueAt(jtCursos.getSelectedRow(), 0).toString());
-            setCampos();
-        }
-    });
-  */              
+             
     }
     
     private void cargaTabla(){
@@ -151,6 +140,12 @@ public class frmCursoAcademico extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        jpcampos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jpcamposPropertyChange(evt);
+            }
+        });
+
         jLabel1.setText("Inicio");
 
         txtInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +221,7 @@ public class frmCursoAcademico extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jpcamposLayout.setVerticalGroup(
             jpcamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,6 +351,10 @@ public class frmCursoAcademico extends javax.swing.JFrame {
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void jpcamposPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jpcamposPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpcamposPropertyChange
 
     private CursoAcademico getCampos(){
         CursoAcademico c=new CursoAcademico();
