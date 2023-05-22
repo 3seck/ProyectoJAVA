@@ -42,17 +42,9 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
 
     private void configTablaAutorizaciones() {
 
-        String col[] = {"DNIAlumno",  "DNIAutorizado"};
+        String col[] = {"DNIAlumno","NombreAlumno", "DNIAutorizado","NombreAutorizado", "Parentesco"};
 
-        DefaultTableModel modelo = new DefaultTableModel(col, 0) {
-
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-
-        };
-
+        DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtAutorizaciones.setModel(modelo);
         jtAutorizaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -62,10 +54,7 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
 
         String col[] = {"DNI", "NOMBRE"};
 
-        DefaultTableModel modelo = new DefaultTableModel(col, 0) {
-
-        };
-
+        DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtAlumnos.setModel(modelo);
         jtAlumnos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -75,10 +64,7 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
 
         String col[] = {"DNI", "NOMBRE", "PARENTESCO"};
 
-        DefaultTableModel modelo = new DefaultTableModel(col, 0) {
-
-        };
-
+        DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtAutorizados.setModel(modelo);
         jtAutorizados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -147,8 +133,9 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) jtAutorizaciones.getModel();
         
         FamiliaresAutorizadosDaoImp fami = FamiliaresAutorizadosDaoImp.getInstance();
-        
-        String[] fila = new String[2];
+        AlumnoDaoImp alumc = AlumnoDaoImp.getInstance();
+        AutorizadosDaoImp autorizadoController = AutorizadosDaoImp.getInstance();
+        String[] fila = new String[5];
 
         modelo.setNumRows(0);
         try {    
@@ -157,11 +144,15 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
             List<FamiliaresAutorizados> lst = fami.getAll();
 
             for (FamiliaresAutorizados f : lst) {
+                Alumno alum = alumc.getById(f.getIdalumno());
+                Autorizados auto = autorizadoController.getById(f.getIdautorizado());
                 
-
-                fila[0] = "" + f.getIdalumno();
+                fila[0] = "" + alum.getDni();
+                fila[1] = "" + alum.getNombre();
                 
-                fila[1] = "" +  f.getIdautorizado();
+                fila[2] = "" +  auto.getDni();
+                fila[3] = "" +  auto.getNombre();
+                fila[4] = "" +  auto.getParentesco();
                 
 
                 modelo.addRow(fila);
@@ -224,9 +215,13 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txtBuscarAlumnos = new javax.swing.JTextField();
         txtBuscarAutorizados = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtAutorizaciones = new javax.swing.JTable();
+        txtBuscarAutorizaciones = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -339,6 +334,10 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Buscar");
+
+        jLabel7.setText("Buscar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -362,7 +361,7 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
                         .addComponent(txtDniAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnacpetarParentesco)
-                        .addGap(18, 18, Short.MAX_VALUE))
+                        .addGap(18, 19, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -377,18 +376,28 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtParentesco, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(txtBuscarAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtBuscarAutorizados, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscarAlumnos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscarAutorizados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -440,16 +449,39 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(jtAutorizaciones);
 
+        txtBuscarAutorizaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarAutorizacionesActionPerformed(evt);
+            }
+        });
+        txtBuscarAutorizaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarAutorizacionesKeyPressed(evt);
+            }
+        });
+
+        jLabel8.setText("Buscar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarAutorizaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscarAutorizaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -536,9 +568,28 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
         try {
             fami.add(getCamposAdd());
             JOptionPane.showMessageDialog(this, "Autorizado agragado correctamente");
+            mostrarValoresEnTablaAutorizaciones();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnacpetarParentescoActionPerformed
+
+    private void txtBuscarAutorizacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarAutorizacionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarAutorizacionesActionPerformed
+
+    private void txtBuscarAutorizacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarAutorizacionesKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel modelo = (DefaultTableModel) jtAutorizaciones.getModel();
+            TableRowSorter<TableModel> trSorter = new TableRowSorter<>(modelo);
+            jtAutorizaciones.setRowSorter(trSorter);
+
+            if (txtBuscarAutorizaciones.getText().length() == 0) {
+                trSorter.setRowFilter(null);
+            } else {
+                trSorter.setRowFilter(RowFilter.regexFilter(txtBuscarAutorizaciones.getText().trim()));
+            }
+        }
+    }//GEN-LAST:event_txtBuscarAutorizacionesKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -548,6 +599,9 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -557,6 +611,7 @@ public class fmrAutorizaciones extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtAutorizaciones;
     private javax.swing.JTable jtAutorizados;
     private javax.swing.JTextField txtBuscarAlumnos;
+    private javax.swing.JTextField txtBuscarAutorizaciones;
     private javax.swing.JTextField txtBuscarAutorizados;
     private javax.swing.JTextField txtDniAlumno;
     private javax.swing.JTextField txtDniAutorizado;

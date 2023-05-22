@@ -36,19 +36,9 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
     private void configTabla() {
 
         String col[] = {"ID", "DNI", "NOMBRE", "APELLIDOS", "FECHA NACIMIENTO", "TELEFONO", "EMAIL", "DIRECCION", "CP", "POBLACION", "PROVINCIA"};
-
-        DefaultTableModel modelo = new DefaultTableModel(col, 0) {
-
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-
-        };
-
+        DefaultTableModel modelo = new DefaultTableModel(col, 0);
         jtAlumnos.setModel(modelo);
         jtAlumnos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
     }
 
     private void cargaTabla() {
@@ -249,10 +239,10 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(btnAnadir)
                     .addComponent(btnGuardar)
                     .addComponent(btnAtra))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlCampos.setVisible(false);
@@ -449,7 +439,7 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jLabel15.setText("Lo alumnos seleccionado se añadiran a Alumnos antiguos");
+        jLabel15.setText("Los alumnos seleccionado se añadiran a Alumnos antiguos");
 
         javax.swing.GroupLayout pnlDeleteLayout = new javax.swing.GroupLayout(pnlDelete);
         pnlDelete.setLayout(pnlDeleteLayout);
@@ -507,7 +497,7 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         pack();

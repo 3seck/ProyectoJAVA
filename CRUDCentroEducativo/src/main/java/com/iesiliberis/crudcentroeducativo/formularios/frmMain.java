@@ -153,7 +153,9 @@ public class frmMain extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         optmAlumno = new javax.swing.JMenuItem();
         jMneuAlumnosAntiguos = new javax.swing.JMenuItem();
+        MenuAutorizaciones = new javax.swing.JMenu();
         jMenuAutorizaciones = new javax.swing.JMenuItem();
+        MenuFamiliaresAutorizados = new javax.swing.JMenuItem();
         jmCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -329,13 +331,25 @@ public class frmMain extends javax.swing.JFrame {
 
         editMenu.add(jMenu1);
 
+        MenuAutorizaciones.setText("Administrar Autorizaciones");
+
         jMenuAutorizaciones.setText("Autorizaciones");
         jMenuAutorizaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuAutorizacionesActionPerformed(evt);
             }
         });
-        editMenu.add(jMenuAutorizaciones);
+        MenuAutorizaciones.add(jMenuAutorizaciones);
+
+        MenuFamiliaresAutorizados.setText("Familiares Autorizados");
+        MenuFamiliaresAutorizados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuFamiliaresAutorizadosActionPerformed(evt);
+            }
+        });
+        MenuAutorizaciones.add(MenuFamiliaresAutorizados);
+
+        editMenu.add(MenuAutorizaciones);
 
         menuBar.add(editMenu);
 
@@ -459,6 +473,11 @@ public class frmMain extends javax.swing.JFrame {
         mostrarIFrame(pndEscritorio, autor);
     }//GEN-LAST:event_jMenuAutorizacionesActionPerformed
 
+    private void MenuFamiliaresAutorizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFamiliaresAutorizadosActionPerformed
+        fmrAutorizados auto = new fmrAutorizados();
+        mostrarIFrame(pndEscritorio, auto);
+    }//GEN-LAST:event_MenuFamiliaresAutorizadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -495,6 +514,8 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuAutorizaciones;
+    private javax.swing.JMenuItem MenuFamiliaresAutorizados;
     private javax.swing.JMenuItem PersonalActual;
     private javax.swing.JMenuItem PersonalAntiguo;
     private javax.swing.JMenuItem contentMenuItem;

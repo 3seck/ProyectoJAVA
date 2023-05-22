@@ -158,14 +158,29 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuAutorizaciones">
+            <Menu class="javax.swing.JMenu" name="MenuAutorizaciones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Autorizaciones"/>
+                <Property name="text" type="java.lang.String" value="Administrar Autorizaciones"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAutorizacionesActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuAutorizaciones">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Autorizaciones"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAutorizacionesActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="MenuFamiliaresAutorizados">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Familiares Autorizados"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuFamiliaresAutorizadosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmCursoAcademico">
