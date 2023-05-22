@@ -23,4 +23,6 @@ public interface AutorizadosDao {
     int update(Autorizados a)  throws SQLException;
     
     void delete(int id)  throws SQLException;
+    
+    int getIdByDni(String dni) throws SQLException;
 }

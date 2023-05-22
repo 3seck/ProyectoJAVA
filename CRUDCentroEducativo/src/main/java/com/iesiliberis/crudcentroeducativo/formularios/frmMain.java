@@ -153,6 +153,7 @@ public class frmMain extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         optmAlumno = new javax.swing.JMenuItem();
         jMneuAlumnosAntiguos = new javax.swing.JMenuItem();
+        jMenuAutorizaciones = new javax.swing.JMenuItem();
         jmCursoAcademico = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
@@ -328,6 +329,14 @@ public class frmMain extends javax.swing.JFrame {
 
         editMenu.add(jMenu1);
 
+        jMenuAutorizaciones.setText("Autorizaciones");
+        jMenuAutorizaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAutorizacionesActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuAutorizaciones);
+
         menuBar.add(editMenu);
 
         jmCursoAcademico.setText("Año Academico");
@@ -445,6 +454,11 @@ public class frmMain extends javax.swing.JFrame {
         mostrarIFrame(pndEscritorio, alum);
     }//GEN-LAST:event_jMneuAlumnosAntiguosActionPerformed
 
+    private void jMenuAutorizacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAutorizacionesActionPerformed
+        fmrAutorizaciones autor = new fmrAutorizaciones();
+        mostrarIFrame(pndEscritorio, autor);
+    }//GEN-LAST:event_jMenuAutorizacionesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -497,6 +511,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuAutorizaciones;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMneuAlumnosAntiguos;

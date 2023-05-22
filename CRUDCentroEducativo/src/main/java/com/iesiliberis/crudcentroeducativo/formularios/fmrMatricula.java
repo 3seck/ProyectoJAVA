@@ -131,6 +131,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         modelo.setNumRows(0);
         try {    
             
+            // Se ordena la lista por curso academico por consulta sql no por lista de id de cursos
             List<Matricula> lst = matriculaControler.getMatriculaByCursoAca(cursoaca);
 
             for (Matricula mat : lst) {

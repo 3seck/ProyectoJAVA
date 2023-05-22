@@ -262,6 +262,8 @@ public class MatriculaDaoImp implements MatriculaDao {
         return idMatricula;
     }
 
+    
+    //Se orddena a traves de join no por la lista de ID curso 
     @Override
     public List<Matricula> getMatriculaByCursoAca(int idcursoaca) throws SQLException {
         Matricula matri = null;

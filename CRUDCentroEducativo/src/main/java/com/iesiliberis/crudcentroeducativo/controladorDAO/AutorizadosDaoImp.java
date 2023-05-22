@@ -10,12 +10,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
  
 public class AutorizadosDaoImp implements AutorizadosDao {
 
+    private static AutorizadosDaoImp instance;
+    
+    static{
+        instance=new AutorizadosDaoImp();
+    }
+    
+    private AutorizadosDaoImp(){ }
+    
+    public static AutorizadosDaoImp getInstance(){
+        return instance;
+    }
+    
+    
+    
     @Override
     public int add(Autorizados a) throws SQLException {
         String sql="""
@@ -71,7 +86,31 @@ public class AutorizadosDaoImp implements AutorizadosDao {
 
     @Override
     public List<Autorizados> getAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Autorizados auto=null;
+        String sql="select * from autorizado ";
+        
+        List<Autorizados> result=new ArrayList();
+
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+         
+            ResultSet rs=pstm.executeQuery();
+            
+            while (rs.next()){
+                auto = new Autorizados();
+                
+                auto.setId(rs.getInt("id"));
+                auto.setDni(rs.getString("dni"));
+                auto.setNombre(rs.getString("nombre"));
+                auto.setApellido1(rs.getString("apellido1"));
+                auto.setApellido2(rs.getString("apellido2"));
+                auto.setParentesco(rs.getString("parentesto"));
+                result.add(auto);
+            }
+            
+        }
+        
+        return result;
     }
 
     @Override
@@ -82,6 +121,31 @@ public class AutorizadosDaoImp implements AutorizadosDao {
     @Override
     public void delete(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getIdByDni(String dni) throws SQLException {
+        int id =0;
+        String sql="select id from autorizado where dni=?";
+
+        try(Connection cn=MyDataSource.getConnection();
+            PreparedStatement pstm=cn.prepareStatement(sql);){
+        
+            pstm.setString(1, dni);
+            
+            ResultSet rs=pstm.executeQuery();
+            
+            if (rs.next()){
+                
+                id = rs.getInt("id");
+                
+                
+                
+            }
+            
+        }
+        
+        return id;
     }
     
 }
