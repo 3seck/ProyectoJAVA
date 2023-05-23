@@ -166,41 +166,49 @@ public class frmMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("1. Seleccion un Año Academico");
         pndEscritorio.add(jLabel1);
         jLabel1.setBounds(80, 60, 230, 19);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("2. Añade un Curso ");
         pndEscritorio.add(jLabel2);
         jLabel2.setBounds(80, 90, 160, 19);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("3.Añade un Aula");
         pndEscritorio.add(jLabel3);
         jLabel3.setBounds(80, 120, 120, 19);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("4.Añade al Personal");
         pndEscritorio.add(jLabel4);
         jLabel4.setBounds(80, 150, 170, 19);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("5.Añade las Unidades");
         pndEscritorio.add(jLabel5);
         jLabel5.setBounds(80, 180, 180, 19);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("6.Añade a los Alumnos");
         pndEscritorio.add(jLabel6);
         jLabel6.setBounds(80, 210, 180, 19);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("7.Añade las matriculas");
         pndEscritorio.add(jLabel7);
         jLabel7.setBounds(80, 240, 210, 19);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Siga las instrucciones de uso: ");
         pndEscritorio.add(jLabel8);
         jLabel8.setBounds(30, 5, 360, 40);
