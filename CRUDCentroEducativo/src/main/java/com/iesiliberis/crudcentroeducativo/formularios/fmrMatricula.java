@@ -28,9 +28,11 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
     /**
      * Creates new form fmrMatricula
      */
+    int cusoID;
     int cursoaca;
     private List<Integer> idsCursos;
     MatriculaDaoImp matriculaControler = MatriculaDaoImp.getInstance();
+
     public fmrMatricula(List<Integer> idsCursos, int cursoaca) {
         initComponents();
         this.idsCursos = idsCursos;
@@ -43,8 +45,9 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         setCamposAlumnos();
         configTablaVerMatriculados();
         mostrarValoresEnTablaVerMatriculados();
+        cargarCombo();
     }
-    
+
     private void configTablaVerMatriculados() {
         String col[] = {"nombre", "dni", "codigo"};
         DefaultTableModel modelo = new DefaultTableModel(col, 0);
@@ -119,8 +122,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
             System.out.println("Error:" + e.getMessage());
         }
     }
-    
-    
+
     private void mostrarValoresEnTablaVerMatriculados() {
         DefaultTableModel modelo = (DefaultTableModel) jtVerMatriculados.getModel();
 
@@ -129,8 +131,8 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         String[] fila = new String[3];
 
         modelo.setNumRows(0);
-        try {    
-            
+        try {
+
             // Se ordena la lista por curso academico por consulta sql no por lista de id de cursos
             List<Matricula> lst = matriculaControler.getMatriculaByCursoAca(cursoaca);
 
@@ -143,7 +145,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
                 fila[2] = uni.getCodigo();
 
                 modelo.addRow(fila);
-            
+
             }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
@@ -170,14 +172,14 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         txtDni.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 0).toString());
         txtNombre.setText(jtAlumnos.getValueAt(jtAlumnos.getSelectedRow(), 1).toString());
     }
-    
-    private Matricula getCamposAdd(){
+
+    private Matricula getCamposAdd() {
         Matricula matri = new Matricula();
-        
+
         matri.setCodUnidad(txtCodigo.getText());
         matri.setDniAlumno(txtDni.getText());
         matri.setDescripcion(txtDescripcion.getText());
-        
+
         return matri;
     }
 
@@ -201,6 +203,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         jtAlumnos = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jccodCurso = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -338,37 +341,47 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Buscar");
 
+        jccodCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jccodCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jccodCursoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(261, 261, 261)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jccodCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 18, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(261, 261, 261)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(3, 3, 3)
+                    .addComponent(jLabel3)
+                    .addComponent(jccodCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,12 +397,12 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
 
     private void btnMatricularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatricularActionPerformed
         MatriculaDaoImp matri = MatriculaDaoImp.getInstance();
-        
+
         try {
             matri.add(getCamposAdd());
             JOptionPane.showMessageDialog(this, "Matricula agregada correctamente");
             mostrarValoresEnTablaVerMatriculados();
-            
+
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
@@ -413,6 +426,31 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyPressed
 
+    private void cargarCombo(){
+        try {
+            jccodCurso.removeAllItems();
+            for (Unidad curso : UnidadDaoImp.getInstance().getAll()) {
+                jccodCurso.addItem(curso.getCodigo());
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
+    private void jccodCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jccodCursoActionPerformed
+        txtBuscar.setText(String.valueOf(jccodCurso.getSelectedItem()));
+        DefaultTableModel modelo = (DefaultTableModel) jtVerMatriculados.getModel();
+            TableRowSorter<TableModel> trSorter = new TableRowSorter<>(modelo);
+            jtVerMatriculados.setRowSorter(trSorter);
+
+            if (txtBuscar.getText().length() == 0) {
+                trSorter.setRowFilter(null);
+            } else {
+                trSorter.setRowFilter(RowFilter.regexFilter(txtBuscar.getText().trim()));
+            }
+    }//GEN-LAST:event_jccodCursoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMatricular;
@@ -423,6 +461,7 @@ public class fmrMatricula extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JComboBox<String> jccodCurso;
     private javax.swing.JTable jtAlumnos;
     private javax.swing.JTable jtUnidades;
     private javax.swing.JTable jtVerMatriculados;
