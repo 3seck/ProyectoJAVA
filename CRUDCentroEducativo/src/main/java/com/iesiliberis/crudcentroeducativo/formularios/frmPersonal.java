@@ -290,14 +290,14 @@ public class frmPersonal extends javax.swing.JInternalFrame {
         txtId.setVisible(false);
         jLId.setVisible(false);
 
-        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirActionPerformed(evt);
             }
         });
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnEditar.setToolTipText("");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,21 +305,21 @@ public class frmPersonal extends javax.swing.JInternalFrame {
             }
         });
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\delete.png")); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\delete.png")); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnAtras.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAtras.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);

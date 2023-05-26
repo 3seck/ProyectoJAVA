@@ -172,35 +172,35 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtAlumnos);
 
-        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirActionPerformed(evt);
             }
         });
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\delete.png")); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\delete.png")); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnAtra.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAtra.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAtra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtraActionPerformed(evt);
@@ -223,7 +223,7 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                 .addComponent(btnGuardar)
                 .addGap(78, 78, 78)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAtra)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
@@ -232,17 +232,17 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnAnadir)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnAtra))
-                .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnEditar)
+                            .addComponent(btnAnadir)
+                            .addComponent(btnGuardar)
+                            .addComponent(btnAtra)))
+                    .addComponent(jLabel1))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pnlCampos.setVisible(false);
@@ -497,7 +497,7 @@ public class frmIAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();

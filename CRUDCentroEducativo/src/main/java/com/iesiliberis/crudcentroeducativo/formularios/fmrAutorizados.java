@@ -130,35 +130,35 @@ public class fmrAutorizados extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\add_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnadirActionPerformed(evt);
             }
         });
 
-        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\edit_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\save_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnAtra.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnAtra.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\cancel_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnAtra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtraActionPerformed(evt);
             }
         });
 
-        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\imgJava\\delete.png")); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\alvar\\Desktop\\CRUDCentroEducativo\\imgJava\\delete.png")); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -192,7 +192,7 @@ public class fmrAutorizados extends javax.swing.JInternalFrame {
                     .addComponent(btnGuardar)
                     .addComponent(btnEditar)
                     .addComponent(btnAnadir))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnGuardar.setVisible(false);
@@ -306,11 +306,9 @@ public class fmrAutorizados extends javax.swing.JInternalFrame {
                     .addGroup(pnlCamposLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel6))
-                    .addGroup(pnlCamposLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptarEdit))))
+                    .addGroup(pnlCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAceptarEdit)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 

@@ -96,7 +96,7 @@
                       <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAnadir" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -105,7 +105,7 @@
         <Component class="javax.swing.JButton" name="btnAnadir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alvar\Desktop\imgJava\add_FILL0_wght400_GRAD0_opsz48.png"/>
+              <Image iconType="2" name="C:\Users\alvar\Desktop\CRUDCentroEducativo\imgJava\add_FILL0_wght400_GRAD0_opsz48.png"/>
             </Property>
           </Properties>
           <Events>
@@ -115,7 +115,7 @@
         <Component class="javax.swing.JButton" name="btnEditar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alvar\Desktop\imgJava\edit_FILL0_wght400_GRAD0_opsz48.png"/>
+              <Image iconType="2" name="C:\Users\alvar\Desktop\CRUDCentroEducativo\imgJava\edit_FILL0_wght400_GRAD0_opsz48.png"/>
             </Property>
           </Properties>
           <Events>
@@ -125,7 +125,7 @@
         <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alvar\Desktop\imgJava\save_FILL0_wght400_GRAD0_opsz48.png"/>
+              <Image iconType="2" name="C:\Users\alvar\Desktop\CRUDCentroEducativo\imgJava\save_FILL0_wght400_GRAD0_opsz48.png"/>
             </Property>
           </Properties>
           <Events>
@@ -138,7 +138,7 @@
         <Component class="javax.swing.JButton" name="btnAtra">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alvar\Desktop\imgJava\cancel_FILL0_wght400_GRAD0_opsz48.png"/>
+              <Image iconType="2" name="C:\Users\alvar\Desktop\CRUDCentroEducativo\imgJava\cancel_FILL0_wght400_GRAD0_opsz48.png"/>
             </Property>
           </Properties>
           <Events>
@@ -148,7 +148,7 @@
         <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\alvar\Desktop\imgJava\delete.png"/>
+              <Image iconType="2" name="C:\Users\alvar\Desktop\CRUDCentroEducativo\imgJava\delete.png"/>
             </Property>
           </Properties>
           <Events>
@@ -226,12 +226,9 @@
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnAceptarEdit" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAceptarEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
